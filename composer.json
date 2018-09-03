@@ -1,0 +1,7 @@
+{
+    "require": {
+        "tuupola/slim-jwt-auth": "^2.4",
+        "firebase/php-jwt": "^5.0",
+        "slim/slim": "^3.0"
+    }
+}
