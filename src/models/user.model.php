@@ -2,17 +2,17 @@
 
 class User {
   public $id;
-  public $first_name;
-  public $last_name;
+  public $name;
   public $email;
   private $password;
   public $phone;
-  public $role_id;
-  public $created_by;
+  public $reg_date;
+  public $id_role;
       
   public function __construct() {
     $this->id = intval($this->id);
     $this->phone = intval($this->phone);
-    $this->role_id = intval($this->role_id);
+    $this->id_role = intval($this->id_role);
+    $this->reg_date = strtotime($this->reg_date);
   }
 }

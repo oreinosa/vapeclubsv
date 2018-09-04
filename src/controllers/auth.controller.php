@@ -2,6 +2,7 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \Firebase\JWT\JWT;
+require_once "../src/models/user.model.php";
 
 class AuthController {
 
@@ -25,12 +26,12 @@ class AuthController {
         // Execute prepared statement
         $stmt->execute();
         // Fetch next row result as object
-        $user = $stmt->fetch(PDO::FETCH_OBJ);
+        $user = $stmt->fetch(PDO::FETCH_CLASS, "User");
 
         if(password_verify($password, $user->password_hash)) {
           // echo json_encode($users);
           $user = array(
-            "name" => $user->first_name . ' ' . $user->last_name,
+            "name" => $user->name,
             "email" => $email,
             "phone" => $user->phone,
             "id_role" => $user->id_role
@@ -69,18 +70,17 @@ class AuthController {
 
   public static function register(Request $request, Response $response) {
     // Assign body params 
-    $first_name = $request->getParam('first_name');
-    $last_name = $request->getParam('last_name');
+    $name = $request->getParam('name');
     $phone = $request->getParam('phone');
     $email = $request->getParam('email');
     $password = $request->getParam('password');
     // Check body params
-    if($first_name && $last_name && $phone && $email && $password){
+    if($name && $phone && $email && $password){
       // SQL query string
       $sql = "INSERT INTO users 
-      (first_name, last_name, email, password_hash, phone) 
+      (name, email, password_hash, phone) 
       VALUES
-      (:first_name, :last_name, :email, :password_hash, :phone)";
+      (:name, :email, :password_hash, :phone)";
 
       try{
         // Get DB Object
@@ -90,8 +90,7 @@ class AuthController {
         // Prepare SQL statement.
         $stmt = $db->prepare($sql);
         // Bind params
-        $stmt->bindParam(':first_name', $first_name);
-        $stmt->bindParam(':last_name',  $last_name);
+        $stmt->bindParam(':name', $name);
         $stmt->bindParam(':phone',      $phone);
         $stmt->bindParam(':email',      $email);
         // Hash password

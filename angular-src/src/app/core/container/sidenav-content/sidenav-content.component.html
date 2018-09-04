@@ -3,19 +3,19 @@
     <a mat-button style="height: 0; position: absolute;"></a>
     <ng-container *ngFor='let link of links'>
       <ng-container *ngIf='!link?.children;else subMenuTemplate'>
-        <a mat-list-item (click)='toggleNav.emit()' [routerLink]='link.route' routerLinkActive='active'>
+        <a mat-list-item (click)='toggleNav.emit()' [routerLink]='link.route' routerLinkActive='active' [routerLinkActiveOptions]='{exact:true}'>
           <mat-icon *ngIf='link.icon'>{{ link.icon }}</mat-icon>
           {{ link.label }}
         </a>
       </ng-container>
       <ng-template #subMenuTemplate>
-        <a mat-list-item routerLinkActive='active'>
+        <a mat-list-item routerLinkActive='active' [routerLinkActiveOptions]='{exact:true}'>
           <mat-icon *ngIf='link.icon'>{{ link.icon }}</mat-icon>
           {{ link.label }}
           <mat-icon class="drop-arrow float-right">arrow_drop_down</mat-icon>
         </a>
         <a mat-list-item class='sub-menu-item' (click)='toggleNav.emit()' *ngFor='let childrenLink of link.children' [routerLink]='[link.route, childrenLink.route]'
-          routerLinkActive='active'>
+          routerLinkActive='active' [routerLinkActiveOptions]='{exact:true}'>
           <mat-icon *ngIf='childrenLink.icon'>{{ childrenLink.icon }}</mat-icon>
           {{ childrenLink.label }}
         </a>

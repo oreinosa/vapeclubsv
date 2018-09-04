@@ -6,7 +6,7 @@ import { User } from "../shared/models/user";
 import { Login } from "../shared/models/login";
 import { Register } from "../shared/models/register";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { environment } from "../../environments/environment";
 
 @Injectable({
@@ -27,6 +27,7 @@ export class AuthService {
     this.linksSubject = new BehaviorSubject([
       { label: "Bienvenidos", route: "", icon: "home" },
       { label: "Catálogo", route: "catalogo", icon: "bookmark" },
+      { label: "Contacto", route: "contacto", icon: "contact_phone" },
       { label: "FAQ", route: "faq", icon: "question_answer" },
     ]);
     this.actionsSubject = new BehaviorSubject([
@@ -58,10 +59,16 @@ export class AuthService {
 
   login(login: Login) {
     return this.http.post<any>(this.api + "login", login).pipe(
-      map(res => {
+      tap(res => {
         if (res.data && res.token) {
           this.updateUserData(res.data as User, res.token as string);
         }
+      }),
+      map(res => {
+        if (res.data) {
+          return res.data as User;
+        }
+        return null;
       })
     );
   }
@@ -92,19 +99,20 @@ export class AuthService {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
     }
-    this.updateRouting(user ? user.role : "not-signed-in");
+    this.updateRouting(user ? user.id_role : 0);
   }
 
-  private updateRouting(role: string) {
-    console.log("Updating routing for ", role);
+  private updateRouting(id_role: number) {
+    console.log("Updating routing for ", id_role);
     const links: any[] = [
       { label: "Bienvenidos", route: "", icon: "home" },
       { label: "Catálogo", route: "catalogo", icon: "bookmark" },
+      { label: "Contacto", route: "contacto", icon: "contact_phone" },
       { label: "FAQ", route: "faq", icon: "question_answer" },
     ];
     const actions: any[] = [];
-    switch (role) {
-      case "Admin":
+    switch (id_role) {
+      case 3:
         links.push({
           label: "Admin",
           route: "admin",
@@ -122,7 +130,7 @@ export class AuthService {
           icon: "assignment_late"
         });
       // tslint:disable-next-line:no-switch-case-fall-through
-      case "Cliente":
+      case 1:
         actions.push({ label: "Perfil", name: "perfil", icon: "person_pin" });
         break;
       default:

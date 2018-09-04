@@ -1,4 +1,3 @@
-import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
@@ -8,8 +7,7 @@ import { FaqComponent } from './faq/faq.component';
 
 const routes: Routes = [
   { path: 'faq', component: FaqComponent },
-  { path: 'about', component: AboutComponent },
-  { path: "contact-us", component: ContactUsComponent },
+  { path: "contacto", component: ContactUsComponent },
   { path: "not-found", component: NotFoundComponent },
   { path: "", pathMatch: "full", component: WelcomeComponent },
 ];

@@ -4,7 +4,8 @@
     color: white;
     &:hover:not(#menu-button):not(#app-title),
     &.active:not(#menu-button):not(#app-title) {
-      color: black;
+      // color: gray;
+      background-color: rgba(0,0,0,.05)
     }
   }
   // .mat-button {
@@ -28,7 +29,7 @@
   }
 
   .app-link{
-    padding: 0px 5px;
+    padding: 0px 7.5px;
   }
 }
 .contact-info {

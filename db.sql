@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS `vape-club`;
-CREATE DATABASE IF NOT EXISTS `vape-club';
+CREATE DATABASE IF NOT EXISTS `vape-club`;
 USE `vape-club`;
 
 DROP TABLE IF EXISTS `roles`;
@@ -20,19 +20,20 @@ CREATE TABLE IF NOT EXISTS `users` (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(25) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    password VARCHAR(350) NOT NULL,
+    phone VARCHAR(10) NOT NULL,
+    password_hash VARCHAR(350) NOT NULL,
     reg_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     id_role INT UNSIGNED DEFAULT 1 NOT NULL,
       INDEX id_role_index (id_role),
       FOREIGN KEY (id_role)
       REFERENCES `roles`(id)
 );
-INSERT INTO `users`
-(name, email, password, id_role)
-VALUES
-("cliente", "cliente@vapeclub.info", "ZHAwR3dyem8yYmczQVBEZDNMckxGdz09", 1),
-('Gestor', 'gestor@vapeclub.info', 'a3o4TU0vZHVtNzRCRU1ZaDR4RkowUT09',2),
-("Admin", "admin@vapeclubsv.com", "$2y$10$v3RrP8JztdGSVHJb9M5h0OArFW7YYuv/ZOjUc.faBS0hvm4Zh.5QS", 3);
+-- INSERT INTO `users`
+-- (name, email, password_hash, id_role)
+-- VALUES
+-- ("cliente", "cliente@vapeclub.info", "ZHAwR3dyem8yYmczQVBEZDNMckxGdz09", 1),
+-- ('Gestor', 'gestor@vapeclub.info', 'a3o4TU0vZHVtNzRCRU1ZaDR4RkowUT09',2),
+-- ("Admin", "admin@vapeclubsv.com", "$2y$10$v3RrP8JztdGSVHJb9M5h0OArFW7YYuv/ZOjUc.faBS0hvm4Zh.5QS", 3);
 
 DROP TABLE IF EXISTS `faqs`;
 CREATE TABLE IF NOT EXISTS `faqs` (

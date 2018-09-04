@@ -11,14 +11,12 @@ import { FooterComponent } from "./container/footer/footer.component";
 import { CoreRoutingModule } from "./core-routing.module";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { FaqComponent } from "./faq/faq.component";
-import { AboutComponent } from "./about/about.component";
 import { ToolbarComponent } from "./container/toolbar/toolbar.component";
 import { SidenavContentComponent } from "./container/sidenav-content/sidenav-content.component";
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { PresentationComponent } from "./welcome/presentation/presentation.component";
 
-import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -26,7 +24,6 @@ import { AgmCoreModule } from '@agm/core';
     RouterModule,
     MatToolbarModule,
     MatSidenavModule,
-    AgmCoreModule,
     // ShoppingCartModule,
     CoreRoutingModule
   ],
@@ -37,7 +34,6 @@ import { AgmCoreModule } from '@agm/core';
     FooterComponent,
     NotFoundComponent,
     FaqComponent,
-    AboutComponent,
     ToolbarComponent,
     SidenavContentComponent,
     WelcomeComponent,

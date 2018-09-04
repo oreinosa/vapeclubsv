@@ -11,8 +11,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { CoreModule } from "./core/core.module";
 import { NotificationsModule } from "./notifications/notifications.module";
-// import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
-// import { QuickActionsModule } from "./quick-actions/quick-actions.module";
 
 import { AuthModule } from "./auth/auth.module";
 import { AuthService } from "./auth/auth.service";
@@ -23,6 +21,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { MenuModule } from "./menu/menu.module";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -50,8 +49,6 @@ export function tokenGetter() {
     CoreModule,
     AuthModule,
     MenuModule,
-    // QuickActionsModule,
-    // ShoppingCartModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],

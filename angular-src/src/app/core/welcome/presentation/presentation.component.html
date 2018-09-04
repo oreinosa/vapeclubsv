@@ -1,12 +1,14 @@
 <mat-card class='bg-primary text-center presentation py-5'>
   <ng-container *ngIf='presentation; else loading'>
     <img [src]="presentation?.imageURL" [alt]="presentation?.name" class='img-fluid rounded-circle'>
-    <h5 class='mt-2 text-center'>{{ presentation?.name }}</h5>
-    <p class='mt-4'>
-      {{ presentation?.description }}
-    </p>
-    <div class="price my-4">
-      <p >
+    <div class="presentation-description">
+      <h5 class='mt-2 text-center'>{{ presentation?.name }}</h5>
+      <p class='mt-4'>
+        {{ presentation?.description }}
+      </p>
+    </div>
+    <div class="presentation-price my-4">
+      <p>
         {{ presentation?.price | currency }}
       </p>
     </div>

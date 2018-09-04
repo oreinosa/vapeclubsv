@@ -1,14 +1,11 @@
 <div class="row">
-  <div class="col-12 offset-md-1 col-md-8">
-    <mat-card class='bg-dark' style='display:inline-block'>
+  <div class="col-12 offset-0 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 mb-3">
+    <mat-card class='bg-primary' style='display:inline-block'>
       <h4>Contacto</h4>
     </mat-card>
   </div>
-</div>
-<br>
-<div class="row clearfix">
-  <div class="col-12 offset-md-1 col-md-4 mb-3">
-    <mat-card class="bg-dark text-center">
+  <div class="col-12 col-sm-10 offset-sm-1 col-md-4 offset-md-1 col-lg-4 offset-lg-2 mb-3">
+    <mat-card class="bg-primary text-center">
       <h5>
         Encuentranos en VapeCrew!
         <br> Centro Comercial Ilusión, Calle el Jabali, Ciudad Merliot
@@ -19,7 +16,7 @@
       </h5>
     </mat-card>
     <br>
-    <mat-card class="bg-dark text-center">
+    <mat-card class="bg-primary text-center">
       <mat-card-header style='display:inline-block'>
         <mat-card-title>
           <h4 class='text-center'>Horario de Entregas</h4>
@@ -47,17 +44,9 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div class="col-12 col-md-6">
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-    </agm-map>
-  </div>
-</div>
-<br>
-<div class="row">
-  <div class="col-12 offset-sm-3 col-sm-6 offset-md-3 col-md-6">
+  <div class="col-12 col-sm-10 offset-sm-1 col-md-6 col-lg-4 offset-md-0">
     <form #f='ngForm' (ngSubmit)='onSubmit(f)'>
-      <mat-card class="bg-dark text-light text-center">
+      <mat-card class="bg-primary text-center">
         <mat-card-content>
           <div class="form-group">
             <label for="name">Nombre</label>
@@ -77,9 +66,15 @@
           </div>
         </mat-card-content>
         <mat-card-actions align='end'>
-          <button type='button' mat-button [disabled]='f?.invalid'>Enviar</button>
+          <button type='button' mat-button class='bg-primary' [disabled]='f?.invalid'>Enviar</button>
         </mat-card-actions>
       </mat-card>
     </form>
   </div>
 </div>
+<!-- <br>
+<div class="row">
+  <div class="col-12 offset-sm-3 col-sm-6 offset-md-3 col-md-6">
+    
+  </div>
+</div> -->

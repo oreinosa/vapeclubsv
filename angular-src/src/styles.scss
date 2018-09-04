@@ -26,6 +26,12 @@ a.mat-button {
 .menu-subheader{
   margin-top: -7.5px;
 }
+button:disabled,
+button[disabled],
+.mat-button:disabled,
+.mat-button[disabled],{
+  cursor: not-allowed!important;
+}
 // a.active.mat-list-item{
 //   background-color: rgba(0,0,0,.14);
 // }

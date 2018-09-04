@@ -1,13 +1,14 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+require_once "../src/models/user.model.php";
 
 class UsersController {
   private static $collection = "users";
 
   public static function getAll(Request $request, Response $response) {
     // SQL query string
-    $sql = "SELECT id, first_name, last_name, email, phone, id_role, created_by FROM ". self::$collection;
+    $sql = "SELECT id, name, email, phone, reg_date, id_role FROM ". self::$collection;
     
     try{
       // Get DB Object
@@ -17,7 +18,7 @@ class UsersController {
       // Submit query to get ALL
       $stmt = $db->query($sql);
       // Fetch array of rows
-      $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      $users = $stmt->fetchAll(PDO::FETCH_CLASS, "User");
       // echo json_encode($users);
       $data = array(
           "data" => $users
@@ -38,7 +39,7 @@ class UsersController {
     // Assign ID attribute
     $id = $request->getAttribute('id');
     // SQL query string
-    $sql = "SELECT id, first_name, last_name, email, phone, id_role, created_by FROM ".self::$collection." WHERE id = :id";
+    $sql = "SELECT id, name, email, phone, reg_date, id_role FROM ".self::$collection." WHERE id = :id";
 
     if($id){
       try{
@@ -53,7 +54,7 @@ class UsersController {
         // Execute prepared statement
         $stmt->execute();
         // Fetch next row result as object
-        $user = $stmt->fetch(PDO::FETCH_OBJ);
+        $user = $stmt->fetch(PDO::FETCH_CLASS, "User");
         // If object was found
         if($user){
           $data = array(
@@ -89,18 +90,17 @@ class UsersController {
 
   public static function add(Request $request, Response $response) {
     // Assign body params 
-    $first_name = $request->getParam('first_name');
-    $last_name = $request->getParam('last_name');
+    $name = $request->getParam('name');
     $phone = $request->getParam('phone');
     $email = $request->getParam('email');
     $password = $request->getParam('password');
     // Check body params
-    if($first_name && $last_name && $phone && $email && $password){
+    if($name && $phone && $email && $password){
       // SQL query string
       $sql = "INSERT INTO ".self::$collection." 
-      (first_name, last_name, email, password_hash, phone) 
+      (name, email, password_hash, phone) 
       VALUES
-      (:first_name, :last_name, :email, :password_hash, :phone)";
+      (:name, :email, :password_hash, :phone)";
 
       try{
         // Get DB Object
@@ -110,8 +110,7 @@ class UsersController {
         // Prepare SQL statement.
         $stmt = $db->prepare($sql);
         // Bind params
-        $stmt->bindParam(':first_name', $first_name);
-        $stmt->bindParam(':last_name',  $last_name);
+        $stmt->bindParam(':name', $name);
         $stmt->bindParam(':phone',      $phone);
         $stmt->bindParam(':email',      $email);
         // Hash password
@@ -156,16 +155,14 @@ class UsersController {
     // Assign attribute {id}
     $id = $request->getAttribute('id');
     // Assign body params
-    $first_name = $request->getParam('first_name');
-    $last_name = $request->getParam('last_name');
+    $name = $request->getParam('name');
     $phone = $request->getParam('phone');
     $email = $request->getParam('email');
     // Check ID and body params
-    if($id && $first_name && $last_name && $phone && $email){
+    if($id && $name && $phone && $email){
       // SQL query string
       $sql = "UPDATE ".self::$collection." SET
-              first_name 	= :first_name,
-              last_name 	= :last_name,
+              name 	= :name,
               phone		= :phone,
               email		= :email
               WHERE id = :id";
@@ -178,8 +175,7 @@ class UsersController {
         // Prepare SQL statement.
         $stmt = $db->prepare($sql);
         // Bind params
-        $stmt->bindParam(':first_name', $first_name);
-        $stmt->bindParam(':last_name',  $last_name);
+        $stmt->bindParam(':name', $name);
         $stmt->bindParam(':phone',      $phone);
         $stmt->bindParam(':email',      $email);
         $stmt->bindParam(':id',    $id);

@@ -3,18 +3,25 @@
   margin-bottom: 10px;
 }
 .presentation{
-  max-height: 550px;
+  height: 550px;
 }
 .hot{
   position: absolute;
   right: 30px;
   top: 25px;
 }
-.price {
+.presentation-description{
+  height:200px;
+}
+.presentation-price {
   border: 2px solid white;
   background-color: lightred;
   display: inline-block;
   padding: 10px;
+  line-height: 15px;
   position: relative;
-  bottom: -25px;
+  bottom: 5px;
+  p{
+    margin-bottom: 0px;
+  }
 }
