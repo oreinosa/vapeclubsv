@@ -26,8 +26,8 @@ class AuthController {
         // Execute prepared statement
         $stmt->execute();
         // Fetch next row result as object
-        $user = $stmt->fetch(PDO::FETCH_CLASS, "User");
-
+        // $user = $stmt->fetch(PDO::FETCH_CLASS, PDO::FETCH_PROPS_LATE, "User");
+        $user = $stmt->fetch(PDO::FETCH_OBJ);
         if(password_verify($password, $user->password_hash)) {
           // echo json_encode($users);
           $user = array(

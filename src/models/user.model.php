@@ -4,7 +4,7 @@ class User {
   public $id;
   public $name;
   public $email;
-  private $password;
+  public $password_hash;
   public $phone;
   public $reg_date;
   public $id_role;
