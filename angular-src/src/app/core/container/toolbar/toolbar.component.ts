@@ -30,14 +30,14 @@ export class ToolbarComponent implements OnInit {
   @Output()
   toggleNav = new EventEmitter();
 
-  scrolled = false;
+  // scrolled = false;
 
-  @HostListener("window:scroll", [])
-  onWindowScroll() {
-    // do some stuff here when the window is scrolled
-    this.scrolled =
-      window.scrollY > 35 || !(this.overlay === "md");
-  }
+  // @HostListener("window:scroll", [])
+  // onWindowScroll() {
+  //   // do some stuff here when the window is scrolled
+  //   this.scrolled =
+  //     window.scrollY > 35;
+  // }
 
   constructor() { }
 
