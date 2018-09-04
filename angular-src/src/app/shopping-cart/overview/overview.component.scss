@@ -1,0 +1,18 @@
+.shopping-cart-overview {
+  height: 100%;
+  padding: 10px;
+  // padding-top: 10px;
+
+  .table-container {
+    // width: 100%;
+    table {
+      .mat-footer-cell,
+      .mat-cell {
+        padding: 5px;
+      }
+      .mat-footer-cell {
+        font-weight: bolder;
+      }
+    }
+  }
+}

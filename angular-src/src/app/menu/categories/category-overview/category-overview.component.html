@@ -1,0 +1,11 @@
+<mat-card class='my-2' (click)='onNavigate(category.name)'>
+  <mat-card-content *ngIf='category?.description' class='text-center'>
+    <h2>{{ category.name }}</h2>
+    <ng-container *ngIf='!onlyName'>
+      <img mat-card-image src="{{category.imageURL | showImage}}" [alt]="category.name">
+      <h6>
+        {{ category.description }}
+      </h6>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

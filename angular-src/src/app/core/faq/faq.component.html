@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-12 offset-md-2 col-md-8">
+    <mat-card class='bg-dark' style='display:inline-block'>
+      <h4>FAQ</h4>
+    </mat-card>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-12 offset-md-2 col-md-8">
+    <mat-card class='bg-dark text-light'>
+      <p>
+        Es muy importante que estés pendiente de esta sección ya que acá están las respuestas a las preguntas que recibimos con mayor
+        frecuencia. Si tu pregunta no está expuesta abajo te invitamos a que nos escribas y con mucho gusto te atenderemos.​
+      </p>
+      <ul class='faqs'>
+        <li *ngFor='let faq of faqs'>
+          <p>
+            <span class="question">{{ faq.question }}</span>
+            <br>
+            <span class="answer">{{ faq.answer }}</span>
+          </p>
+        </li>
+      </ul>
+    </mat-card>
+  </div>
+</div>

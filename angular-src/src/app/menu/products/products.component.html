@@ -1,0 +1,20 @@
+<div class="row">
+  <ng-container *ngIf='products.length;else noProducts'>
+    <div class="product-container col-12 col-md-6 col-lg-4 my-3" *ngFor='let product of products'>
+      <app-menu-product-overview [product]='product' [byCategory]='byCategory'></app-menu-product-overview>
+    </div>
+  </ng-container>
+  <!-- IF NO PRODUCTS -->
+  <ng-template #noProducts>
+    <div class="col-12">
+      <mat-card>
+        <mat-card-content>
+          <!-- HINT IF SEARCHING FOR CATEGORY OR BY NAME -->
+          <h4 class="text-center">
+            No se encontró ningún producto
+          </h4>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-template>
+</div>

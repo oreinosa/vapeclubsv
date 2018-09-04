@@ -1,0 +1,27 @@
+<form #f='ngForm' (ngSubmit)='onSubmit(f)'>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Actualizar {{ service.className | lowercase }}</h2>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf='object as category'>
+        <mat-form-field>
+          <input matInput type="text" placeholder='Nombre' [ngModel]='category.name' name='name' required [readonly]='f.submitted'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder='Descripción' [ngModel]='category.description' name='description' [readonly]='f.submitted'>
+        </mat-form-field>
+        <div class="col-12 col-sm-6 col-lg-6 offset-lg-1 text-center my-2">
+          <app-upload [fileURL]='category.imageURL | showImage'></app-upload>
+          <input type="text" placeholder='Image URL' [ngModel]='category.imageURL' name='imageURL' class='d-none'>
+        </div>
+      </ng-container>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button type='submit' [disabled]='f.invalid || f.submitted'>Actualizar</button>
+      <button mat-button type='button' routerLink='../../' [disabled]='f.submitted'>Cancelar</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,0 +1,20 @@
+.img-fluid{
+  height: 150px;
+  margin-bottom: 10px;
+}
+.presentation{
+  max-height: 550px;
+}
+.hot{
+  position: absolute;
+  right: 30px;
+  top: 25px;
+}
+.price {
+  border: 2px solid white;
+  background-color: lightred;
+  display: inline-block;
+  padding: 10px;
+  position: relative;
+  bottom: -25px;
+}

@@ -1,0 +1,23 @@
+.previous-price {
+  text-decoration: line-through;
+}
+.mat-icon{
+  vertical-align: bottom;
+}
+.mat-card{
+  height: 100%;
+  .product-image{
+    height: 200px;
+  }
+  .category-label{
+    font-weight: bold;
+  }
+  .category-name{
+    color: black!important;
+  }
+  .form-container{
+    .product-amount{
+      width: 100%;
+    }
+  }
+}

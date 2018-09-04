@@ -1,0 +1,44 @@
+<ng-container *ngIf='listView;else featuredOverviewTemplate'>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h1>Promociones</h1>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-nav-list>
+        <a mat-list-item *ngFor='let featuredProduct of featured' (click)='onNavigate(featuredProduct._id)'>
+          <span class="featured-name">{{ featuredProduct.name }}</span>
+          <span class="mx-3"></span>
+          <span class='previous-price'>
+            {{ featuredProduct.price | currency }}
+          </span>
+          <span class="arrow">
+            <mat-icon>arrow_right_alt</mat-icon>
+          </span>
+          <span class='offer-price'>
+            {{ (featuredProduct.price - featuredProduct?.discount) | currency }}
+          </span>
+        </a>
+      </mat-nav-list>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+<ng-template #featuredOverviewTemplate>
+  <div class="row">
+    <div class="col-12 mx-auto">
+      <mat-card class='featured-label'>
+        <mat-card-content>
+          <h1 class='text-center'>Promociones</h1>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-12">
+      <div class="row">
+        <div *ngFor='let featuredProduct of featured' class="hover category-container col-12 col-sm-6 col-md-5 offset-md-1 col-lg-4 offset-lg-0 mx-auto">
+          <app-menu-featured-overview [product]='featuredProduct'></app-menu-featured-overview>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

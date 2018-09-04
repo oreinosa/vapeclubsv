@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-12">
+    <mat-card class='bg-primary' style='display:inline-block'>
+      <h4>Presentaciones</h4>
+    </mat-card>
+  </div>
+  <div class="col-12 col-lg-11">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2" *ngFor='let presentation of $presentations | async'>
+        <app-welcome-presentation [presentation]='presentation'></app-welcome-presentation>
+      </div>
+    </div>
+
+  </div>
+  <div class="bg-primary col-12 text-center p-5 my-3">
+    <h4>Nuestros productos son hechos con materiales importados grado USP</h4>
+    <p>
+      Desde nuestros inicios nuestro mayor enfoque ha sido siempre mantener un alto standard de calidad en la fabricación y distribución
+      de nuestros líquidos, utilizando solamente productos aprobados por la FDA y de grado USP.
+    </p>
+  </div>
+  <div class="col-12 offset-md-1 col-md-7">
+    <div class="mb-3" *ngFor='let category of $categories | async; let isLast=last' [ngClass]='isLast ? "": "mb-2"'>
+      <app-welcome-category [category]='category'></app-welcome-category>
+    </div>
+  </div>
+  <div class="col-12 col-md-3">
+    <mat-card class='bg-primary'>
+      <h5>Muchos sabores!</h5>
+      <p>Tenemos un amplio catálogo en el que ofrecemos diferentes opciones para la mayoría de los gustos. Ofrecemos mezclas
+        de sabores que estamos seguros que serán una bomba de placer en tu paladar y que te dejarán con ganas de más!
+      </p>
+      <h5>Entrega Rápida </h5>
+      <p>
+        Tratamos de hacer las entregas el mismo día que se recibe la orden, o en un máximo de 24 horas en las zonas con cobertura.
+        De igual forma, los envíos departamentales se hacen el mismo día si se reciben antes de las 3:30 pm.
+      </p>
+      <h5>Servicio personalizado</h5>
+      <p>
+        Nos enfocamos en conocer tus gustos para poder ofrecerte las opciones que mejor se adapten a ti. Valoramos mucho la confianza
+        que depositas en nosotros y es por eso que queremos ofrecerte lo mejor. Vapea calidad, vapea con confianza, vapea
+        con Vape Club SV!
+      </p>
+    </mat-card>
+  </div>
+</div>

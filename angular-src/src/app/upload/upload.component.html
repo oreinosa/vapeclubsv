@@ -1,0 +1,25 @@
+<div class="row" (drop)='onDrop($event)' (dragover)="onDragover($event);">
+  <div class="col-12 mb-4">
+    <div class="drop_zone my-2 hover" (click)='addFile()' >
+      <p class="hint-message">{{ hint }}</p>
+      <p class='supported-types'>({{ types }})</p>
+    </div>
+    <input type="file" #file style='display:none' name='foo' placeholder='File upload' (change)="previewFile($event)" [accept]='types'
+    />
+  </div>
+  <div class="col-12 mb-4">
+    <ng-container *ngIf='fileURL;else noFile'>
+      <ng-container [ngSwitch]='type'>
+        <ng-container *ngSwitchCase='"image"'>
+          <img [src]="fileURL" alt="image" class='img-fluid'>
+        </ng-container>
+        <ng-container *ngSwitchCase='"document"'>
+          document preview
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-template #noFile>
+      <h6>({{ errorMsg }})</h6>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+.img-fluid {
+  max-height: 350px;
+  text-align: center;
+}
+
+.drop_zone {
+  height: 100%;
+  border: 1px solid #aaa;
+  background-color: #fafafa;
+  text-align: center;
+  padding-top: 15px;
+  // padding-bottom: 10px;
+  padding-right: 15%;
+  padding-left: 15%;
+
+  .hint-message {
+    font-size: 25px;
+    line-height: 25px;
+  }
+  .supported-types {
+    margin-top: 15px;
+    font-size: 15px;
+    line-height: 15px;
+  }
+}

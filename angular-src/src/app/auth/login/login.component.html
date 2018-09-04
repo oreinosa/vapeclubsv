@@ -1,0 +1,19 @@
+<form #f='ngForm' (ngSubmit)='onSubmit(f)'>
+  <h2 mat-dialog-title>Ingresa a tu cuenta</h2>
+  <mat-dialog-content>
+    <!-- <div class="row"> -->
+    <!-- <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto text-center"> -->
+    <mat-form-field>
+      <input matInput type="email" placeholder='Correo electrónico' [(ngModel)]='login.email' name='email' required [readonly]='f.submitted'>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" placeholder='Contraseña' [(ngModel)]='login.password' name='password' [readonly]='f.submitted'>
+    </mat-form-field>
+    <!-- </div> -->
+    <!-- </div> -->
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type='submit' [disabled]='f.invalid || f.submitted'>Ingresar</button>
+    <button mat-button mat-dialog-close [disabled]='f.submitted'>Cancelar</button>
+  </mat-dialog-actions>
+</form>
