@@ -1,7 +1,5 @@
-interface Role {
-  id?: number;
-  name?: string;
-}
+import { Role } from "./role";
+
 export class User {
   constructor(
     public id?: number,

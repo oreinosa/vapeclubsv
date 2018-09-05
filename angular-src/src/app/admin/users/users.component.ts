@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss', '../../shared/styles/crud-list.scss']
 })
-export class UsersComponent extends List<User> {
+export class UsersComponent extends List<User> implements OnInit {
   constructor(
     public service: UsersService,
     public router: Router,
@@ -17,7 +17,7 @@ export class UsersComponent extends List<User> {
     super(
       service,
       router,
-      ["id", "createdAt", "name", "phone", "email", "role", "actions"]
+      ["id", "reg_date", "name", "phone", "email", "role.name", "actions"]
     );
   }
 
@@ -29,4 +29,13 @@ export class UsersComponent extends List<User> {
   //   }
   //   this.router.navigate(["admin", this.service.collectionName.toLowerCase(), action, username]);
   // }
+
+  customSorting() {
+    this.dataSource.sortingDataAccessor = (user, property) => {
+      switch (property) {
+        case 'role.name': return user.role.name;
+        default: return user[property];
+      }
+    };
+  }
 }

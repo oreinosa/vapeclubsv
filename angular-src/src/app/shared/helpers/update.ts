@@ -21,6 +21,7 @@ export class Update<T> implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.paramMap
       .pipe(
+        takeUntil(this.ngUnsubscribe),
         map(params => +params.get("id")),
         tap(id => {
           this.id = id;
@@ -36,7 +37,7 @@ export class Update<T> implements OnInit, OnDestroy {
               : this.service.one(id)
         ),
         takeUntil(this.ngUnsubscribe)
-        // tap(object => console.log(object))
+        ,tap(object => console.log(object))
       )
       .subscribe(object => (this.object = object));
   }

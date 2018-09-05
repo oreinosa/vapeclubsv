@@ -1,14 +1,19 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-require_once "../src/models/category.model.php";
 
 class CategoriesController {
   private static $collection = "categories";
 
   public static function getAll(Request $request, Response $response) {
     // SQL query string
-    $sql = "SELECT * FROM ". self::$collection;
+    @ $properties = $request->getQueryParams()["properties"];
+    // return var_dump($properties);
+    if($properties){
+      $sql = "SELECT $properties FROM ". self::$collection;
+    }else{
+      $sql = "SELECT * FROM ". self::$collection;
+    }
     
     try{
       // Get DB Object
@@ -18,7 +23,8 @@ class CategoriesController {
       // Submit query to get ALL
       $stmt = $db->query($sql);
       // Fetch array of rows
-      $categories = $stmt->fetchAll(PDO::FETCH_CLASS, "Category");
+      $categories = $stmt->fetchAll(PDO::FETCH_OBJ);
+
       // echo json_encode($categories);
       $data = array(
           "data" => $categories
@@ -37,7 +43,7 @@ class CategoriesController {
 
   public static function getOneById(Request $request, Response $response) {
     // Assign ID attribute
-    $id = $request->getAttribute('id');
+    $id = (int)$request->getAttribute('id');
     // SQL query string
     $sql = "SELECT * FROM ".self::$collection." WHERE id = :id";
 
@@ -54,7 +60,7 @@ class CategoriesController {
         // Execute prepared statement
         $stmt->execute();
         // Fetch next row result as object
-        $category = $stmt->fetch(PDO::FETCH_CLASS, "Category");
+        $category = $stmt->fetch(PDO::FETCH_OBJ);
         // If object was found
         if($category){
           $data = array(
@@ -110,7 +116,9 @@ class CategoriesController {
         $stmt->execute();
         // Create response array 
         $data = array(
-            "data" => (int)$db->lastInsertId()
+            "data" => array(
+              "id" => (int)$db->lastInsertId()
+            )
         );       
         // Return response as JSON with 200 code
         return $response->withJson($data, 200);
@@ -148,11 +156,11 @@ class CategoriesController {
     $name = $request->getParam('name');
     $description = $request->getParam('description');
     // Check ID and body params
-    if($id && $description){
+    if($id && $name && $description){
       // SQL query string
       $sql = "UPDATE ".self::$collection." SET
               name 	= :name,
-              description		= :description,
+              description		= :description
               WHERE id = :id";
 
       try{
@@ -168,12 +176,9 @@ class CategoriesController {
         $stmt->bindParam(':id',    $id);
         // Execute prepared statement
         $stmt->execute();
-        if($stmt->rowCount() > 0){
-          // Return response with 204 code (NO CONTENT)
-          return $response->withStatus(204);
-        }
+        $data = array("flag" => $stmt->rowCount() > 0);
         // If no objects modified, return 200 code
-        return $response->withStatus(200);
+        return $response->withJSON($data,200);
       } catch(PDOException $e){
         // Create response with error code and message 
         $data = array(

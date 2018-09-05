@@ -10,31 +10,38 @@
       <mat-icon>email</mat-icon>
       info@vapeclubsv.com
     </span>
+    <!-- ACTIONS  -->
     <ng-container *ngIf='(overlay === "md" || overlay === "lg" || overlay === "xl")'>
-      <ng-container *ngFor='let link of actions'>
-        <ng-container *ngIf='!link?.children;else subMenuTemplate'>
-          <!-- <a class='app-link' mat-button [routerLink]='link.route' routerLinkActive='active'>
-            <mat-icon *ngIf='link?.icon'>{{ link.icon }}</mat-icon>
-            <ng-container>{{ link.label }}</ng-container>
-          </a> -->
-          <a class='app-action' (click)='actionEmitter.emit(link.name)'>
-            <mat-icon>{{ link.icon }}</mat-icon>
-            {{ link.label }}
+      <ng-container *ngFor='let action of actions'>
+        <!-- ACTION WITHOUT SUBMENU -->
+        <ng-container *ngIf='!action?.children;else subMenuTemplate'>
+          <a class='app-action' (click)='actionEmitter.emit(action.name)'>
+            <mat-icon>{{ action.icon }}</mat-icon>
+            {{ action.label }}
           </a>
         </ng-container>
+        <!-- ACTION WITH SUBMENU -->
         <ng-template #subMenuTemplate>
-          <a class='app-link hover' #menuTrigger='matMenuTrigger' [matMenuTriggerFor]="subMenu">
-            <mat-icon *ngIf='link?.icon'>{{ link.icon }}</mat-icon>
-            {{ link.label }}
+          <a class='app-action hover' #menuTrigger='matMenuTrigger' [matMenuTriggerFor]="subMenu">
+            <mat-icon *ngIf='action?.icon'>{{ action.icon }}</mat-icon>
+            {{ action.label }}
           </a>
           <mat-menu #subMenu="matMenu" xPosition='after' yPosition='below'>
-            <button disabled mat-menu-item class='menu-subheader'>{{ link.label }}</button>
-            <button mat-menu-item *ngFor='let childrenLink of link.children' [routerLink]='[link.route, childrenLink.route]' routerLinkActive='active'>
-              <mat-icon>{{ childrenLink.icon }}</mat-icon>
-              {{ childrenLink.label }}
+            <span class='app-action-submenu-label' mat-subheader>{{ action.label }}</span>
+            <button class='app-action-submenu-item' mat-menu-item *ngFor='let childrenAction of action.children' [routerLink]='[action.route, childrenAction.route]' routerLinkActive='active'>
+              <mat-icon>{{ childrenAction.icon }}</mat-icon>
+              {{ childrenAction.label }}
             </button>
           </mat-menu>
         </ng-template>
+      </ng-container>
+      <!-- WHEN USER IS SIGNED IN -->
+      <ng-container *ngIf='user'>
+        <!-- SIGN OUT -->
+        <a class='app-action' (click)='actionEmitter.emit("cerrar-sesion")'>
+          <mat-icon>exit_to_app</mat-icon>
+          Cerrar sesión
+        </a>
       </ng-container>
     </ng-container>
 
@@ -47,9 +54,6 @@
       <img src="/assets/images/logo.png" alt="app-logo" class="img-fluid" id="app-logo">
     </ng-template>
     <span id='app-title' *ngIf='!(overlay === "xs")'>{{ appName }}</span>
-
-
-
     <span class="spacer"></span>
     <!-- LINKS MD LG XL -->
     <ng-container *ngIf='(overlay === "md" || overlay === "lg" || overlay === "xl")'>
@@ -74,40 +78,6 @@
           </mat-menu>
         </ng-template>
       </ng-container>
-    </ng-container>
-
-
-    <!-- WHEN USER IS SIGNED IN -->
-    <ng-container *ngIf='user'>
-      <!-- PROFILE MENU BUTTON ON MD LG XL -->
-      <!-- <ng-container *ngIf='(overlay === "md" || overlay === "lg" || overlay === "xl")'>
-        <button [matMenuTriggerFor]='profileMenu' class='app-action' mat-button>
-          <mat-icon>person_pin</mat-icon>
-          <ng-container>Perfil</ng-container>
-        </button>
-      </ng-container> -->
-
-      <!-- PROFILE MENU BUTTON ON XS SM -->
-      <!-- <ng-container *ngIf='(overlay === "xs" || overlay === "sm")'>
-        <button [matMenuTriggerFor]='profileMenu' class='app-action' mat-icon-button matTooltip='Perfil'>
-          <mat-icon>person_pin</mat-icon>
-        </button>
-      </ng-container> -->
-
-
-      <!-- PROFILE MENU OPTIONS -->
-      <!-- <mat-menu #profileMenu="matMenu" xPosition='after' yPosition='below'>
-        <button disabled mat-menu-item class='menu-subheader'>{{ user.name }}</button>
-        <button mat-menu-item [routerLink]='["perfil", "personal"]' routerLinkActive='active'>
-          <mat-icon>person_pin</mat-icon>
-          Mi información personal
-        </button>
-      </mat-menu> -->
-
-      <!-- SIGN OUT -->
-      <button mat-icon-button matTooltip='Cerrar sesión' matTooltipPosition='below' (click)='actionEmitter.emit("cerrar-sesion")'>
-        <mat-icon>exit_to_app</mat-icon>
-      </button>
     </ng-container>
   </mat-toolbar-row>
   <!-- <mat-toolbar-row class='bg-primary' *ngIf='overlay === "xs"'>

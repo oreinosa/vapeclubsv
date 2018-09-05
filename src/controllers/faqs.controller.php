@@ -1,7 +1,6 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-require_once "../src/models/faq.model.php";
 
 class FAQsController {
   private static $collection = "faqs";
@@ -18,7 +17,7 @@ class FAQsController {
       // Submit query to get ALL
       $stmt = $db->query($sql);
       // Fetch array of rows
-      $faqs = $stmt->fetchAll(PDO::FETCH_CLASS, "FAQ");
+      $faqs = $stmt->fetchAll(PDO::FETCH_OBJ);
       // echo json_encode($faqs);
       $data = array(
           "data" => $faqs
@@ -86,15 +85,15 @@ class FAQsController {
 
   public static function add(Request $request, Response $response) {
     // Assign body params 
-    $name = $request->getParam('name');
-    $description = $request->getParam('description');
+    $question = $request->getParam('question');
+    $answer = $request->getParam('answer');
     // Check body params
-    if($name && $description){
+    if($question && $answer){
       // SQL query string
       $sql = "INSERT INTO ".self::$collection." 
-      (name, description) 
+      (question, answer) 
       VALUES
-      (:name, :description)";
+      (:question, :answer)";
 
       try{
         // Get DB Object
@@ -104,13 +103,15 @@ class FAQsController {
         // Prepare SQL statement.
         $stmt = $db->prepare($sql);
         // Bind params
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':description',      $description);
+        $stmt->bindParam(':question', $question);
+        $stmt->bindParam(':answer',      $answer);
         // Execute prepared statement
         $stmt->execute();
         // Create response array 
         $data = array(
-            "data" => (int)$db->lastInsertId()
+            "data" => array(
+              "id" => (int)$db->lastInsertId()
+            )
         );       
         // Return response as JSON with 200 code
         return $response->withJson($data, 200);
@@ -145,14 +146,14 @@ class FAQsController {
     // Assign attribute {id}
     $id = $request->getAttribute('id');
     // Assign body params
-    $name = $request->getParam('name');
-    $description = $request->getParam('description');
+    $question = $request->getParam('question');
+    $answer = $request->getParam('answer');
     // Check ID and body params
-    if($id && $description){
+    if($id && $question && $answer){
       // SQL query string
       $sql = "UPDATE ".self::$collection." SET
-              name 	= :name,
-              description		= :description,
+              question 	= :question,
+              answer		= :answer
               WHERE id = :id";
 
       try{
@@ -163,17 +164,14 @@ class FAQsController {
         // Prepare SQL statement.
         $stmt = $db->prepare($sql);
         // Bind params
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':description',      $description);
+        $stmt->bindParam(':question', $question);
+        $stmt->bindParam(':answer',      $answer);
         $stmt->bindParam(':id',    $id);
         // Execute prepared statement
         $stmt->execute();
-        if($stmt->rowCount() > 0){
-          // Return response with 204 code (NO CONTENT)
-          return $response->withStatus(204);
-        }
+        $data = array("flag" => $stmt->rowCount() > 0);
         // If no objects modified, return 200 code
-        return $response->withStatus(200);
+        return $response->withJSON($data,200);
       } catch(PDOException $e){
         // Create response with error code and message 
         $data = array(

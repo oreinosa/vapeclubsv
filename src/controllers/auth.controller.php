@@ -36,8 +36,11 @@ class AuthController {
         $user = $stmt->fetch(PDO::FETCH_OBJ);
         if(password_verify($password, $user->password_hash)) {
           // echo json_encode($users);
-          $iat = new DateTime('now');
-          $exp = new DateTime('tomorrow');
+          $iat = new DateTime();
+          $exp = new DateTime('friday');
+          // echo $iat->format('Y-m-d H:i:s');
+          // echo '   ';
+          // echo $exp->format('Y-m-d H:i:s');
           $user = array(
             "id" => (int)$user->id,
             "name" => $user->name,
@@ -50,8 +53,11 @@ class AuthController {
             ),
             "iat" => $iat->getTimestamp(),
             "exp" => $exp->getTimestamp()
+            // "iat" => $iat->format('Y-m-d H:i:s'),
+            // "exp" => $exp->format('Y-m-d H:i:s')
           );
           $token = JWT::encode($user, getenv("JWT_SECRET"));
+          unset($user["exp"], $user["iat"]);
           // Generate JWT 
           $data = array(
             "data" => $user,

@@ -7,15 +7,19 @@
     </mat-card-header>
     <mat-card-content>
       <ng-container *ngIf='object as category'>
-        <mat-form-field>
-          <input matInput type="text" placeholder='Nombre' [ngModel]='category.name' name='name' required [readonly]='f.submitted'>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="text" placeholder='Descripción' [ngModel]='category.description' name='description' [readonly]='f.submitted'>
-        </mat-form-field>
-        <div class="col-12 col-sm-6 col-lg-6 offset-lg-1 text-center my-2">
-          <app-upload [fileURL]='category.imageURL | showImage'></app-upload>
-          <input type="text" placeholder='Image URL' [ngModel]='category.imageURL' name='imageURL' class='d-none'>
+        <div class="row">
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-0 col-lg-4 offset-lg-1">
+            <mat-form-field>
+              <input matInput type="text" placeholder='Nombre' [ngModel]='category.name' name='name' required [readonly]='f.submitted'>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="text" placeholder='Descripción' [ngModel]='category.description' name='description' [readonly]='f.submitted'>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-0 col-lg-4 offset-lg-1 text-center my-2">
+            <app-upload [fileURL]='category.imageURL | showImage'></app-upload>
+            <input type="text" placeholder='Image URL' [ngModel]='category.imageURL' name='imageURL' class='d-none'>
+          </div>
         </div>
       </ng-container>
     </mat-card-content>

@@ -16,10 +16,10 @@ export class Create<T> {
   onSubmit(form: NgForm) {
     const product: T = form.value;
     this.service.create(product).subscribe(
-      (addedObject: T) => {
-        console.log(addedObject);
+      (newObject: T) => {
+        console.log(newObject);
         this.notifications.show(
-          `${this.service.className} agregado (ID: ${addedObject["id"]}`,
+          `${this.service.className} agregado (ID: ${newObject['id']})`,
           this.service.collectionName,
           "success"
         );

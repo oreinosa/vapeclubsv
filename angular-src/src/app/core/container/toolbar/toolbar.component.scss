@@ -42,9 +42,14 @@
   }
   .app-action{
     cursor: pointer;
+    text-decoration: none;
   }
-}
 
+}
+.app-action-submenu-label{
+  color: gray;
+  cursor: default!important;
+}
 .sticky {
   position: fixed;
   z-index: 99;

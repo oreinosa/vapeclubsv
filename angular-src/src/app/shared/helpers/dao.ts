@@ -1,6 +1,6 @@
 import { BehaviorSubject, Observable } from "rxjs";
 import { map, tap } from "rxjs/operators";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 
 export abstract class DAO<T> {
@@ -36,8 +36,14 @@ export abstract class DAO<T> {
     return !!this.selectedProductSubject.getValue();
   }
 
-  all() {
-    return this.http.get<any>(this.$api).pipe(
+  all(properties?: string) {
+    let params = {};
+    if (properties) {
+      // console.log(properties);
+      params = { 'properties': properties };
+      // console.log(params);
+    }
+    return this.http.get<any>(this.$api, { params }).pipe(
       map(res => {
         return res.data as T[];
       }),
@@ -55,14 +61,15 @@ export abstract class DAO<T> {
     );
   }
 
-  create(newObject: T) {
-    return this.http.post<any>(this.$api, newObject).pipe(
+  create(object: T) {
+    return this.http.post<any>(this.$api, object).pipe(
       map(res => {
-        return res.data as T;
+        const newObject = { ...res.data as any, ...object as any };
+        return newObject as T;
       }),
-      tap(addedProduct => {
+      tap((newObject) => {
         const objects = this.objects.getValue().slice();
-        objects.push(addedProduct);
+        objects.push(newObject);
         this.objects.next(objects);
       })
     );
@@ -71,15 +78,22 @@ export abstract class DAO<T> {
   update(id: number, object: T) {
     return this.http.put<any>(this.$api + `/${id}`, object).pipe(
       map(res => {
-        return res.data as T;
+        // console.log(res);
+        if (res.flag) {
+          return object as T;
+        }
+        return null;
       }),
-      tap(editedProduct => {
-        const objects = this.objects.getValue().slice();
-        const index = objects.findIndex(
-          _object => _object["id"] === editedProduct["id"]
-        );
-        objects[index] = editedProduct;
-        this.objects.next(objects);
+      tap(editedObject => {
+        console.log(!!editedObject);
+        if (editedObject) {
+          const objects = this.objects.getValue().slice();
+          const index = objects.findIndex(
+            _object => _object["id"] == id
+          );
+          objects[index] = { ...objects[index] as any, ...editedObject as any };
+          this.objects.next(objects);
+        }
       })
     );
   }
@@ -88,7 +102,7 @@ export abstract class DAO<T> {
     return this.http.delete<any>(this.api + `/${id}`).pipe(
       tap(() => {
         const objects = this.objects.getValue().slice();
-        const index = objects.findIndex(_object => _object["id"] === id);
+        const index = objects.findIndex(_object => _object["id"] == id);
         objects.splice(index, 1);
         this.objects.next(objects);
       })

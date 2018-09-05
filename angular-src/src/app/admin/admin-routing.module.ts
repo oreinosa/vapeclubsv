@@ -16,8 +16,20 @@ const routes: Routes = [
         loadChildren: "./categories/categories.module#CategoriesModule"
       },
       {
-        path: "productos",
-        loadChildren: "./products/products.module#ProductsModule"
+        path: "faqs",
+        loadChildren: "./faqs/faqs.module#FAQsModule"
+      },
+      {
+        path: "roles",
+        loadChildren: "./roles/roles.module#RolesModule"
+      },
+      {
+        path: "presentaciones",
+        loadChildren: "./presentations/presentations.module#PresentationsModule"
+      },
+      {
+        path: "sabores",
+        loadChildren: "./flavors/flavors.module#FlavorsModule"
       },
       { path: "", pathMatch: "full", redirectTo: "usuarios" }
     ]

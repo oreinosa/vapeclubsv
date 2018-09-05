@@ -7,7 +7,7 @@
     </mat-card-header>
     <mat-card-content>
       <div class="row">
-        <div class="col-12 col-sm-6 col-lg-4 offset-lg-1">
+        <div class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-0 col-lg-4 offset-lg-1">
           <mat-form-field>
             <input matInput type="text" placeholder='Nombre' [(ngModel)]='category.name' name='name' required [readonly]='f.submitted'>
           </mat-form-field>
@@ -15,7 +15,7 @@
             <input matInput type="text" placeholder='Descripción' [(ngModel)]='category.description' name='description' [readonly]='f.submitted'>
           </mat-form-field>
         </div>
-        <div class="col-12 col-sm-6 col-lg-4 offset-lg-1 text-center my-2">
+        <div class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-0 col-lg-4 offset-lg-1 text-center my-2">
           <app-upload></app-upload>
           <input type="text" placeholder='Image URL' [(ngModel)]='category.imageURL' name='imageURL' class='d-none'>
         </div>

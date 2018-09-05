@@ -44,6 +44,7 @@ export class AuthService {
     if (this.loggedIn()) {
       console.log("user is already logged in");
       token = localStorage.getItem("token");
+      console.log('exp date', this.jwtHelper.getTokenExpirationDate(token));
       user = JSON.parse(localStorage.getItem("user")) as User;
       this.updateRouting(user.role.id);
     }
@@ -122,9 +123,11 @@ export class AuthService {
           icon: "build",
           children: [
             { label: "Usuarios", route: "usuarios", icon: "people" },
+            { label: "Roles", route: "roles", icon: "domain" },
             { label: "Categorías", route: "categorias", icon: "category" },
-            { label: "Productos", route: "productos", icon: "fastfood" },
-            { label: "Combos", route: "combos", icon: "restaurant_menu" }
+            { label: "FAQs", route: "faqs", icon: "question_answer" },
+            { label: "Presentaciones", route: "presentaciones", icon: "subscriptions" },
+            { label: "Sabores", route: "sabores", icon: "smoking_rooms" },
           ]
         });
         links.push({

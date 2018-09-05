@@ -1,6 +1,19 @@
+.mat-column-id{
+  width: 10%;
+}
+.mat-column-name{
+  width: 20%;
+}
+.mat-column-description{
+  width: 25%;
+}
 .mat-column-imageURL {
+  width: 25%;
   text-align: center;
   .img-fluid {
     height: 150px;
   }
+}
+.mat-column-actions{
+  width: 20%;
 }

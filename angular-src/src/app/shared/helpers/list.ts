@@ -20,13 +20,20 @@ export class List<T> implements OnInit, OnDestroy {
     public router: Router,
     public displayedColumns: string[]
   ) {
-    if (true) {
-      const indexID = displayedColumns.indexOf("id");
-      if (indexID >= 0) displayedColumns.splice(indexID, 1);
-    }
+    // if (true) {
+    //   const indexID = displayedColumns.indexOf("id");
+    //   if (indexID >= 0) displayedColumns.splice(indexID, 1);
+    // }
+    
   }
 
   ngOnInit() {
+    this.customSorting();
+    this.dataSource.sort = this.sort;
+    // this.sort.sortChange.subscribe(sort => console.log(sort));
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator.pageSize = 10;
+
     this.service
       .all()
       .pipe(
@@ -34,9 +41,6 @@ export class List<T> implements OnInit, OnDestroy {
         takeUntil(this.ngUnsubscribe),
         tap(objects => {
           console.log(`${this.service.collectionName} : `, objects);
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.paginator.pageSize = 10;
           this.objects = objects;
         })
       )
@@ -47,6 +51,8 @@ export class List<T> implements OnInit, OnDestroy {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
+
+  customSorting() { }
 
   onAction(action: string, object: T) {
     let id = "";
