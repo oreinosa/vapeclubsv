@@ -8,7 +8,7 @@ import { DAO } from "./dao";
 
 export class Delete<T> implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject();
-  _id: string;
+  id: number;
   constructor(
     public service: DAO<T>,
     public notifications: NotificationsService,
@@ -20,16 +20,16 @@ export class Delete<T> implements OnInit, OnDestroy {
     this.route.paramMap
       .pipe(
         takeUntil(this.ngUnsubscribe),
-        map(params => params.get("_id")),
+        map(params => +params.get("id")),
         tap(
-          _id =>
-            !!_id
+          id =>
+            !!id
               ? false
               : this.router.navigate(["../"], { relativeTo: this.route })
         ),
-        filter(_id => !!_id)
+        filter(id => !!id)
       )
-      .subscribe(_id => (this._id = _id));
+      .subscribe(id => (this.id = id));
   }
 
   ngOnDestroy() {
@@ -38,7 +38,7 @@ export class Delete<T> implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.service.delete(this._id).subscribe(
+    this.service.delete(this.id).subscribe(
       () => {
         this.notifications.show(
           `${this.service.className} eliminado`,

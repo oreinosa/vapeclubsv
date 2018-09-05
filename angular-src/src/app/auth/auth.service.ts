@@ -14,6 +14,7 @@ import { environment } from "../../environments/environment";
 })
 export class AuthService {
   private api = environment.api + "auth/";
+
   private userSubject: BehaviorSubject<User>;
   linksSubject: BehaviorSubject<any[]>;
   actionsSubject: BehaviorSubject<any[]>;
@@ -21,8 +22,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private jwtHelper: JwtHelperService,
-    private router: Router
+    private router: Router,
+    public jwtHelper: JwtHelperService
   ) {
     this.linksSubject = new BehaviorSubject([
       { label: "Bienvenidos", route: "", icon: "home" },
@@ -44,6 +45,7 @@ export class AuthService {
       console.log("user is already logged in");
       token = localStorage.getItem("token");
       user = JSON.parse(localStorage.getItem("user")) as User;
+      this.updateRouting(user.role.id);
     }
     this.token = token;
     this.userSubject = new BehaviorSubject<User>(user);
@@ -58,7 +60,7 @@ export class AuthService {
   }
 
   login(login: Login) {
-    return this.http.post<any>(this.api + "login", login).pipe(
+    return this.http.post<any>(this.api + "ingresar", login).pipe(
       tap(res => {
         if (res.data && res.token) {
           this.updateUserData(res.data as User, res.token as string);
@@ -74,7 +76,7 @@ export class AuthService {
   }
 
   register(register: Register) {
-    return this.http.post<any>(this.api + "register", register).pipe(
+    return this.http.post<any>(this.api + "registrarse", register).pipe(
       map(res => {
         if (res.data) {
           return res.data as User;
@@ -93,13 +95,14 @@ export class AuthService {
 
   updateUserData(user: User, token: string) {
     console.log("Updated user : ", user);
+    console.log("Updated token : ", token);
     this.userSubject.next(user);
     this.token = token;
     if (user && token) {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
     }
-    this.updateRouting(user ? user.id_role : 0);
+    this.updateRouting(user ? user.role.id : 0);
   }
 
   private updateRouting(id_role: number) {
@@ -113,7 +116,7 @@ export class AuthService {
     const actions: any[] = [];
     switch (id_role) {
       case 3:
-        links.push({
+        actions.push({
           label: "Admin",
           route: "admin",
           icon: "build",
@@ -125,8 +128,8 @@ export class AuthService {
           ]
         });
         links.push({
-          label: "Órdenes",
-          route: "ordenes",
+          label: "Pedidos",
+          route: "pedidos",
           icon: "assignment_late"
         });
       // tslint:disable-next-line:no-switch-case-fall-through

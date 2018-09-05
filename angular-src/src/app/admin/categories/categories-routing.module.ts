@@ -10,9 +10,9 @@ const routes: Routes = [
     path: '', component: CategoriesComponent, children: [
       { path: 'agregar', component: CreateComponent },
       { path: 'actualizar', component: UpdateComponent },
-      { path: 'actualizar/:_id', component: UpdateComponent },
+      { path: 'actualizar/:id', component: UpdateComponent },
       { path: 'eliminar', component: DeleteComponent },
-      { path: 'eliminar/:_id', component: DeleteComponent },
+      { path: 'eliminar/:id', component: DeleteComponent },
     ]
   },
 ];

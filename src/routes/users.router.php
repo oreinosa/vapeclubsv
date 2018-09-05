@@ -2,7 +2,7 @@
 require_once "../src/controllers/users.controller.php";
 require_once "../src/guards/admin.guard.php";
 
-$app->group('/api/admin/users', function(){
+$app->group('/api/admin/usuarios', function(){
     // Get All Users
     $this->get('',\UsersController::class.":getAll");
     // Get Single User

@@ -49,11 +49,11 @@ export class List<T> implements OnInit, OnDestroy {
   }
 
   onAction(action: string, object: T) {
-    let _id = "";
+    let id = "";
     if (object) {
-      _id = object["_id"];
+      id = object["id"];
       this.service.setSelectedObject(object);
     }
-    this.router.navigate(["admin", this.service.apiRoute, action, _id]);
+    this.router.navigate([this.service.apiRoute, action, id]);
   }
 }

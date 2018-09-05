@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  api: 'http://localhost/api/',
-  static: 'http://localhost/static/',
+  api: 'http://vapeclub.sv/api/',
+  static: 'http://vapeclub.sv/static/',
 };
 
 /*

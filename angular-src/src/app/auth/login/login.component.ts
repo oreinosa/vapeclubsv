@@ -1,6 +1,7 @@
 import { NotificationsService } from "../../notifications/notifications.service";
 import { AuthService } from "../auth.service";
 import { Login } from "../../shared/models/login";
+import { User } from "../../shared/models/user";
 import { Component, OnInit } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -23,11 +24,10 @@ export class LoginComponent implements OnInit {
   onSubmit(form: any) {
     const loginForm: Login = form.value;
     this.auth.login(loginForm).subscribe(
-      (res: any) => {
-        console.log(res);
-        this.auth.updateUserData(res.user, res.token);
+      (user: User) => {
+        console.log(!!user);
         this.notifications.show(
-          `Hola ${res.user.name}!`,
+          `Hola ${user.name}!`,
           undefined,
           "success"
         );

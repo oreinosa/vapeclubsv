@@ -7,10 +7,10 @@
       <input matInput type="text" placeholder='Nombre' [(ngModel)]='register.name' name='name' required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" placeholder='Usuario' [(ngModel)]='register.username' (blur)='prepareUsername($event.target.value)' name='username' required>
+      <input matInput type="email" placeholder='Correo electrónico' [(ngModel)]='register.email' name='email' required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="email" placeholder='Correo electrónico' [(ngModel)]='register.email' name='email' required>
+      <input matInput type="string" placeholder='Número de teléfono' [(ngModel)]='register.phone' name='phone' required>
     </mat-form-field>
     <mat-form-field>
       <input matInput type="password" placeholder='Contraseña' [(ngModel)]='register.password' name='password' required>

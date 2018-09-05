@@ -15,7 +15,7 @@ export abstract class DAO<T> {
     public collectionName: string,
     public apiRoute: string
   ) {
-    this.$api += apiRoute + "/";
+    this.$api += apiRoute;
   }
 
   get api(): string {
@@ -47,8 +47,8 @@ export abstract class DAO<T> {
     );
   }
 
-  one(_id: string) {
-    return this.http.get<any>(this.$api + _id).pipe(
+  one(id: number) {
+    return this.http.get<any>(this.$api + `/${id}`).pipe(
       map(res => {
         return res.data as T;
       })
@@ -68,15 +68,15 @@ export abstract class DAO<T> {
     );
   }
 
-  update(_id: string, object: T) {
-    return this.http.put<any>(this.$api + _id, object).pipe(
+  update(id: number, object: T) {
+    return this.http.put<any>(this.$api + `/${id}`, object).pipe(
       map(res => {
         return res.data as T;
       }),
       tap(editedProduct => {
         const objects = this.objects.getValue().slice();
         const index = objects.findIndex(
-          _object => _object["_id"] === editedProduct["_id"]
+          _object => _object["id"] === editedProduct["id"]
         );
         objects[index] = editedProduct;
         this.objects.next(objects);
@@ -84,11 +84,11 @@ export abstract class DAO<T> {
     );
   }
 
-  delete(_id: string) {
-    return this.http.delete<any>(this.api + _id).pipe(
+  delete(id: number) {
+    return this.http.delete<any>(this.api + `/${id}`).pipe(
       tap(() => {
         const objects = this.objects.getValue().slice();
-        const index = objects.findIndex(_object => _object["_id"] === _id);
+        const index = objects.findIndex(_object => _object["id"] === id);
         objects.splice(index, 1);
         this.objects.next(objects);
       })

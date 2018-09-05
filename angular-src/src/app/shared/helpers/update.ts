@@ -10,7 +10,7 @@ import { DAO } from "./dao";
 export class Update<T> implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject();
   object: T;
-  _id: string;
+  id: number;
   constructor(
     public service: DAO<T>,
     public notifications: NotificationsService,
@@ -21,19 +21,19 @@ export class Update<T> implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.paramMap
       .pipe(
-        map(params => params.get("_id")),
-        tap(_id => {
-          this._id = _id;
-          if (_id === null || !(_id as string)) {
+        map(params => +params.get("id")),
+        tap(id => {
+          this.id = id;
+          if (id === null || !(id as number)) {
             this.router.navigate(["../"], { relativeTo: this.route });
           }
         }),
-        filter(_id => !!_id),
+        filter(id => !!id),
         switchMap(
-          _id =>
+          id =>
             this.service.isObjectSelected()
               ? this.service.getSelectedObject()
-              : this.service.one(_id)
+              : this.service.one(id)
         ),
         takeUntil(this.ngUnsubscribe)
         // tap(object => console.log(object))
@@ -48,7 +48,7 @@ export class Update<T> implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     const object: T = form.value;
-    this.service.update(this._id, object).subscribe(
+    this.service.update(this.id, object).subscribe(
       (editedObject: T) => {
         this.notifications.show(
           `${this.service.className} actualizado`,

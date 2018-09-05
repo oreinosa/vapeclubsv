@@ -13,19 +13,19 @@ $app->options('/{routes:.+}', function (Request $request, Response $response, $a
 $app->add(function (Request $req, Response $res, $next) {
   $response = $next($req, $res);
   return $response
-          ->withHeader('Access-Control-Allow-Origin', '*')
-          ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-          ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  ->withHeader('Access-Control-Allow-Origin', '*')
+  ->withHeader('Access-Control-Allow-Headers', 'Authorization, X-Requested-With, Content-Type, Accept, Origin')
+  ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
 // JWT middleware
 $app->add(new Slim\Middleware\JwtAuthentication([
-  "secret" => getenv('JWT-SECRET'),
-  // "secret" => "dasecret",
+  "secret" => getenv("JWT_SECRET"),
   "path" => "/api/admin",
   "error" => function ($request, $response, $arguments) {
     return $response->write('Not Authorized')->withStatus(401);
-  }
+  },
+  "secure" => false 
 ]));
 
 // Require DB class

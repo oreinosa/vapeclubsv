@@ -19,7 +19,7 @@ export class Create<T> {
       (addedObject: T) => {
         console.log(addedObject);
         this.notifications.show(
-          `${this.service.className} agregado (ID: ${addedObject["_id"]}`,
+          `${this.service.className} agregado (ID: ${addedObject["id"]}`,
           this.service.collectionName,
           "success"
         );

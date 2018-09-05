@@ -3,3 +3,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule . index.php [L]
 RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+Header set Access-Control-Allow-Headers "Authorization, X-Requested-With, Content-Type, Accept, Origin"

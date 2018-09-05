@@ -10,12 +10,36 @@
       <mat-icon>email</mat-icon>
       info@vapeclubsv.com
     </span>
-    <a class='app-action' *ngFor='let action of actions' (click)='actionEmitter.emit(action.name)'>
-      <mat-icon>{{ action.icon }}</mat-icon>
-      {{ action.label }}
-    </a>
+    <ng-container *ngIf='(overlay === "md" || overlay === "lg" || overlay === "xl")'>
+      <ng-container *ngFor='let link of actions'>
+        <ng-container *ngIf='!link?.children;else subMenuTemplate'>
+          <!-- <a class='app-link' mat-button [routerLink]='link.route' routerLinkActive='active'>
+            <mat-icon *ngIf='link?.icon'>{{ link.icon }}</mat-icon>
+            <ng-container>{{ link.label }}</ng-container>
+          </a> -->
+          <a class='app-action' (click)='actionEmitter.emit(link.name)'>
+            <mat-icon>{{ link.icon }}</mat-icon>
+            {{ link.label }}
+          </a>
+        </ng-container>
+        <ng-template #subMenuTemplate>
+          <a class='app-link hover' #menuTrigger='matMenuTrigger' [matMenuTriggerFor]="subMenu">
+            <mat-icon *ngIf='link?.icon'>{{ link.icon }}</mat-icon>
+            {{ link.label }}
+          </a>
+          <mat-menu #subMenu="matMenu" xPosition='after' yPosition='below'>
+            <button disabled mat-menu-item class='menu-subheader'>{{ link.label }}</button>
+            <button mat-menu-item *ngFor='let childrenLink of link.children' [routerLink]='[link.route, childrenLink.route]' routerLinkActive='active'>
+              <mat-icon>{{ childrenLink.icon }}</mat-icon>
+              {{ childrenLink.label }}
+            </button>
+          </mat-menu>
+        </ng-template>
+      </ng-container>
+    </ng-container>
+
   </mat-toolbar-row>
-  <mat-toolbar-row class='bg-primary' id='toolbar' >
+  <mat-toolbar-row class='bg-primary' id='toolbar'>
     <button id='menu-button' type="button" aria-label="Toggle sidenav" mat-icon-button (click)="toggleNav.emit()" *ngIf='overlay === "xs" || overlay === "sm"; else showLogo'>
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>

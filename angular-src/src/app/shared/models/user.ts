@@ -1,13 +1,14 @@
-import { environment } from './../../../environments/environment';
+interface Role {
+  id?: number;
+  name?: string;
+}
 export class User {
   constructor(
-    public _id?: number,
+    public id?: number,
     public name?: string,
-    // public username?: string,
     public email?: string,
     public phone?: number,
-    public id_role?: number,
+    public role?: Role,
     public reg_date?: Date,
-    // public password?: string,
   ) {}
 }

@@ -17,34 +17,29 @@ import { AuthService } from "./auth/auth.service";
 import { AdminGuard } from "./auth/admin.guard";
 import { AuthGuard } from "./auth/auth.guard";
 
-import { JwtModule } from "@auth0/angular-jwt";
 import { MenuModule } from "./menu/menu.module";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { JwtModule } from "@auth0/angular-jwt";
 
 
 export function tokenGetter() {
-  return localStorage.getItem("token");
+  const token = localStorage.getItem("token");
+  // console.log(token);
+  return token;
 }
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: [
-          "localhost:8080",
-          "localhost",
-          "127.0.0.1",
-          "thenewfuturesv.com",
-          "www.thenewfuturesv.com",
-          "ubuntu"
-        ]
+        whitelistedDomains: ['vapeclub.sv'],
       }
     }),
-    BrowserAnimationsModule,
     NotificationsModule,
     CoreModule,
     AuthModule,
@@ -56,4 +51,4 @@ export function tokenGetter() {
   bootstrap: [AppComponent],
   providers: [AuthService, AuthGuard, AdminGuard]
 })
-export class AppModule {}
+export class AppModule { }
