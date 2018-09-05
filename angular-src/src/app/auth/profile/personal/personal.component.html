@@ -7,7 +7,7 @@
     </mat-card-header> -->
   <mat-card-content>
     <h4>
-      <b>ID: </b> {{ user._id }}
+      <b>ID: </b> {{ user.id }}
     </h4>
     <h4>
       <b>Nombre: </b> {{ user.name }}
@@ -16,7 +16,7 @@
       <b>Correo electrónico: </b> {{ user.email }}
     </h4>
     <h4>
-      <b>Rol: </b> {{ user.role }}
+      <b>Rol: </b> {{ user.role.name }}
     </h4>
   </mat-card-content>
 </mat-card>
