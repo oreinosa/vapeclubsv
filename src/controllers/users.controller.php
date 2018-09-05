@@ -8,8 +8,10 @@ class UsersController {
 
   public static function getAll(Request $request, Response $response) {
     // SQL query string
-    $sql = "SELECT id, name, email, phone, reg_date, id_role FROM ". self::$collection;
-    
+    $sql = "SELECT u.id, u.name, u.email, u.phone, u.reg_date, r.id as 'role_id', r.name as 'role_name' 
+    FROM users as u
+    INNER JOIN roles as r ON u.id_role = r.id";
+
     try{
       // Get DB Object
       $db = new DB();
@@ -18,7 +20,21 @@ class UsersController {
       // Submit query to get ALL
       $stmt = $db->query($sql);
       // Fetch array of rows
-      $users = $stmt->fetchAll(PDO::FETCH_CLASS, "User");
+      $rs = $stmt->fetchAll(PDO::FETCH_OBJ);
+      $users = array();
+      foreach($rs as $user){
+        array_push($users, array(
+          "id" => (int)$user->id,
+          "name" => $user->name,
+          "phone" => (int)$user->phone,
+          "email" => $user->email,
+          "reg_date" => $user->reg_date,
+          "role" => array(
+            "id" => (int)$user->role_id,
+            "name" => $user->role_name
+          ),
+        ));
+      }
       // echo json_encode($users);
       $data = array(
           "data" => $users

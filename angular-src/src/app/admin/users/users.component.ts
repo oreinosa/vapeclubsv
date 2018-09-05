@@ -17,16 +17,16 @@ export class UsersComponent extends List<User> {
     super(
       service,
       router,
-      ["id", "createdAt", "name", "username", "email", "role", "actions"]
+      ["id", "createdAt", "name", "phone", "email", "role", "actions"]
     );
   }
 
-  onAction(action: string, user: User) {
-    let username = "";
-    if (user) {
-      username = user['username'];
-      this.service.setSelectedObject(user);
-    }
-    this.router.navigate(["admin", this.service.collectionName.toLowerCase(), action, username]);
-  }
+  // onAction(action: string, user: User) {
+  //   let username = "";
+  //   if (user) {
+  //     username = user['username'];
+  //     this.service.setSelectedObject(user);
+  //   }
+  //   this.router.navigate(["admin", this.service.collectionName.toLowerCase(), action, username]);
+  // }
 }
