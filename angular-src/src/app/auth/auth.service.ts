@@ -103,6 +103,7 @@ export class AuthService {
     if (user && token) {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
+      console.log(this.jwtHelper.getTokenExpirationDate(token));
     }
     this.updateRouting(user ? user.role.id : 0);
   }
