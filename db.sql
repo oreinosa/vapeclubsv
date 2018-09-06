@@ -239,9 +239,5 @@ CREATE TABLE IF NOT EXISTS `orders_details` (
     id_order INT UNSIGNED NOT NULL,
       INDEX id_order_index (id_order),
       FOREIGN KEY (id_order)
-      REFERENCES `orders`(id),
-    id_product INT UNSIGNED NOT NULL,
-      INDEX id_product_index (id_product),
-      FOREIGN KEY (id_product)
-      REFERENCES `products`(id)
+      REFERENCES `orders`(id)
 );
