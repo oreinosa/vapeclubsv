@@ -68,6 +68,7 @@ export class AuthService {
         }
       }),
       map(res => {
+        console.log(res);
         if (res.data) {
           return res.data as User;
         }
@@ -80,7 +81,7 @@ export class AuthService {
     return this.http.post<any>(this.api + "registrarse", register).pipe(
       map(res => {
         if (res.data) {
-          return res.data as User;
+          return res.data as string;
         }
         return res;
       })
@@ -119,15 +120,16 @@ export class AuthService {
       case 3:
         actions.push({
           label: "Admin",
-          route: "admin",
+          name: "admin",
           icon: "build",
           children: [
             { label: "Usuarios", route: "usuarios", icon: "people" },
             { label: "Roles", route: "roles", icon: "domain" },
-            { label: "Categorías", route: "categorias", icon: "category" },
             { label: "FAQs", route: "faqs", icon: "question_answer" },
+            { label: "Categorías", route: "categorias", icon: "category" },
             { label: "Presentaciones", route: "presentaciones", icon: "subscriptions" },
-            { label: "Sabores", route: "sabores", icon: "smoking_rooms" },
+            { label: "Sabores", route: "sabores", icon: "cloud" },
+            { label: "Cantidades de nicotina", route: "cantidades-nicotina", icon: "smoking_rooms" },
           ]
         });
         links.push({

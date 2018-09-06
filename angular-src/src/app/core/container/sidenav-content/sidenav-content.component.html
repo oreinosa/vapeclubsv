@@ -23,10 +23,26 @@
     </ng-container>
     <!-- <ng-container *ngIf='overlay === "xs"'> -->
     <hr>
-    <a *ngFor='let action of actions' mat-list-item (click)='actionEmitter.emit(action.name)'>
-      <mat-icon *ngIf='action.icon'>{{ action.icon }}</mat-icon>
-      {{ action.label }}
-    </a>
+    <ng-container *ngFor='let action of actions'>
+      <ng-container *ngIf='!action?.children;else subMenuTemplate'>
+        <a mat-list-item (click)='toggleNav.emit()' (click)='actionEmitter.emit(action.name)'>
+          <mat-icon *ngIf='action.icon'>{{ action.icon }}</mat-icon>
+          {{ action.label }}
+        </a>
+      </ng-container>
+      <ng-template #subMenuTemplate>
+        <a mat-list-item routerLinkActive='active' [routerLinkActiveOptions]='{exact:true}'>
+          <mat-icon *ngIf='action.icon'>{{ action.icon }}</mat-icon>
+          {{ action.label }}
+          <mat-icon class="drop-arrow float-right">arrow_drop_down</mat-icon>
+        </a>
+        <a mat-list-item class='sub-menu-item' (click)='toggleNav.emit()' *ngFor='let childrenAction of action.children' [routerLink]='[action.name, childrenAction.route]'
+          routerLinkActive='active' [routerLinkActiveOptions]='{exact:true}'>
+          <mat-icon *ngIf='childrenAction.icon'>{{ childrenAction.icon }}</mat-icon>
+          {{ childrenAction.label }}
+        </a>
+      </ng-template>
+    </ng-container>
     <a mat-list-item (click)='actionEmitter.emit("cerrar-sesion")' *ngIf='user'>
       <mat-icon>exit_to_app</mat-icon>
       Cerrar sesión

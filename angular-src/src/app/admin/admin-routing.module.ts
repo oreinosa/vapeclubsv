@@ -31,6 +31,10 @@ const routes: Routes = [
         path: "sabores",
         loadChildren: "./flavors/flavors.module#FlavorsModule"
       },
+      {
+        path: "cantidades-nicotina",
+        loadChildren: "./nicotine-amounts/nicotine-amounts.module#NicotineAmountsModule"
+      },
       { path: "", pathMatch: "full", redirectTo: "usuarios" }
     ]
   }

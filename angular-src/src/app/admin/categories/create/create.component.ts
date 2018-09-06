@@ -35,6 +35,7 @@ export class CreateComponent extends Create<Category> {
       .subscribe(
         (imageURL: string) => {
           // console.log(imageURL);
+          // Image uploaded
           // this.product.imageURL = imageURL;
           const imageCtrl = form.controls.imageURL;
           imageCtrl.setValue(imageURL); // set imageURL input value to the resolt of the upload POST event

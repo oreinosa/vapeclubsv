@@ -1,6 +1,6 @@
 <mat-card class='bg-primary text-center presentation py-5'>
   <ng-container *ngIf='presentation; else loading'>
-    <img [src]="presentation?.imageURL" [alt]="presentation?.name" class='img-fluid rounded-circle'>
+    <img src="{{presentation?.imageURL | showImage }}" [alt]="presentation?.name" class='img-fluid rounded-circle'>
     <div class="presentation-description">
       <h5 class='mt-2 text-center'>{{ presentation?.name }}</h5>
       <p class='mt-4'>

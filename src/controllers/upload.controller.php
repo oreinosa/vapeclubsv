@@ -17,11 +17,10 @@ class UploadController {
       // Return response as JSON with 400 code   
       return $response->withJson($data, 200);
     }
-    // Create response with error message
-    $data = array(
-      "error" => $upload["data"]
-    );    
     // Return response as JSON with 400 code   
-    return $response->withJson($data, 400);
+    $data = "Missing fields";
+    $response = $response->write($upload["data"]);
+    $response = $response->withStatus(400);
+    return $response;
   }
 }

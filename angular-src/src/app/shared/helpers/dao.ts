@@ -4,7 +4,8 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 
 export abstract class DAO<T> {
-  private $api: string = environment.api;
+  private $adminApi: string = environment.api + 'admin/';
+  private $publicApi: string = environment.api + 'public/';
 
   private selectedProductSubject = new BehaviorSubject<T>(null);
   public objects = new BehaviorSubject<T[]>([]);
@@ -15,14 +16,15 @@ export abstract class DAO<T> {
     public collectionName: string,
     public apiRoute: string
   ) {
-    this.$api += apiRoute;
+    this.$adminApi += apiRoute;
+    this.$publicApi += apiRoute;
   }
 
   get api(): string {
-    return this.$api;
+    return this.$adminApi;
   }
   // set api(api: string) {
-  //   this.$api = api;
+  //   this.$adminApi = api;
   // }
   getSelectedObject(): Observable<T> {
     return this.selectedProductSubject.asObservable();
@@ -43,7 +45,18 @@ export abstract class DAO<T> {
       params = { 'properties': properties };
       // console.log(params);
     }
-    return this.http.get<any>(this.$api, { params }).pipe(
+    return this.http.get<any>(this.$adminApi, { params }).pipe(
+      map(res => {
+        return res.data as T[];
+      }),
+      tap(objects => {
+        this.objects.next(objects);
+      })
+    );
+  }
+
+  allPublic() {
+    return this.http.get<any>(this.$publicApi).pipe(
       map(res => {
         return res.data as T[];
       }),
@@ -54,7 +67,7 @@ export abstract class DAO<T> {
   }
 
   one(id: number) {
-    return this.http.get<any>(this.$api + `/${id}`).pipe(
+    return this.http.get<any>(this.$adminApi + `/${id}`).pipe(
       map(res => {
         return res.data as T;
       })
@@ -62,7 +75,7 @@ export abstract class DAO<T> {
   }
 
   create(object: T) {
-    return this.http.post<any>(this.$api, object).pipe(
+    return this.http.post<any>(this.$adminApi, object).pipe(
       map(res => {
         const newObject = { ...res.data as any, ...object as any };
         return newObject as T;
@@ -76,7 +89,7 @@ export abstract class DAO<T> {
   }
 
   update(id: number, object: T) {
-    return this.http.put<any>(this.$api + `/${id}`, object).pipe(
+    return this.http.put<any>(this.$adminApi + `/${id}`, object).pipe(
       map(res => {
         // console.log(res);
         if (res.flag) {

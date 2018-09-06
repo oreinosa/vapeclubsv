@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         // });
       },
       (e: HttpErrorResponse) => {
+        console.log(e);
         this.notifications.show(e.error, undefined, "danger");
         form.resetForm();
       }

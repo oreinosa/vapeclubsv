@@ -25,12 +25,9 @@ class FAQsController {
       return $response->withJson($data);
     } catch(PDOException $e){
       // Create response with error message
-      $data = array(
-          "code" => $e->getCode(),
-          "error" => $e->getMessage()
-      );        
-      // Return error with 500 code
-      return $response->withJson($data, 500);
+      $response = $response->write($e->getMessage());
+      $response = $response->withStatus(500);
+      return $response;
     }
   }
 
@@ -62,24 +59,21 @@ class FAQsController {
           return $response->withJson($data);
         }
         // If no object was found, return 404 code
-        $data = array(
-          "data" => null
-        );
-        return $response->withJSON($data, 404);
+        $data = "Not found";
+        $response = $response->write($data);
+        $response = $response->withStatus(404);
+        return $response;
       } catch(PDOException $e){
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        return $response->withJson($data, 500);
+        $response = $response->write($e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
       }
     }else{
       // Create response with error message
-      $data = array(
-          "error" => "Missing fields"
-      );    
-      // Return error with 400 code   
-      return $response->withJson($data, 400);
+      $data = "Missing fields";
+      $response = $response->write($data);
+      $response = $response->withStatus(400);
+      return $response;
     }
   }
 
@@ -117,28 +111,21 @@ class FAQsController {
         return $response->withJson($data, 200);
       } catch(PDOException $e){
         // Create response with error code and message 
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        // Return response as JSON with 500 code
-        return $response->withJson($data, 500);
+        $response = $response->write('PDOException ' . $e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
       } catch(Exception $e){
         // Create response with error code and message 
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        // Return response as JSON with 500 code
-        return $response->withJson($data, 500);
+        $response = $response->write('Exception ' . $data);
+        $response = $response->withStatus(500);
+        return $response;
       }
     }else{
       // Create response with error message
-      $data = array(
-          "error" => "Missing fields"
-      );    
-      // Return response as JSON with 400 code   
-      return $response->withJson($data, 400);
+      $data = "Missing fields";
+      $response = $response->write($data);
+      $response = $response->withStatus(400);
+      return $response;
     }
   }
   
@@ -174,20 +161,16 @@ class FAQsController {
         return $response->withJSON($data,200);
       } catch(PDOException $e){
         // Create response with error code and message 
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        // Return response as JSON with 500 code
-        return $response->withJson($data, 500);
+        $response = $response->write($e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
       }
     }else{
       // Create response with error message
-      $data = array(
-          "error" => "Missing fields"
-      );    
-      // Return response as JSON with 400 code   
-      return $response->withJson($data, 400);
+      $data = "Missing fields";
+      $response = $response->write($data);
+      $response = $response->withStatus(400);
+      return $response;
     }
   }
 
@@ -214,23 +197,22 @@ class FAQsController {
           return $response->withStatus(204);
         }
         // If no objects modified, return 404 code
-        return $response->withStatus(404);
+        $data = "Not found";
+        $response = $response->write($data);
+        $response = $response->withStatus(404);
+        return $response;
       } catch(PDOException $e){
         // Create response with error code and message 
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        // Return response as JSON with 500 code
-        return $response->withJson($data, 500);
+        $response = $response->write($e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
       }
     }else{
       // Create response with error message
-      $data = array(
-          "error" => "Missing fields"
-      );    
-      // Return response as JSON with 400 code   
-      return $response->withJson($data, 400);
+      $data = "Missing fields";
+      $response = $response->write($data);
+      $response = $response->withStatus(400);
+      return $response;
     }
   }
 

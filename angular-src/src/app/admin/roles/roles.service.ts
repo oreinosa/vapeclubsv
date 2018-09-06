@@ -7,6 +7,6 @@ import { DAO } from "../../shared/helpers/dao";
 })
 export class RolesService extends DAO<Role> {
   constructor(httpClient: HttpClient) {
-    super(httpClient, "Rol", "Roles", "admin/roles");
+    super(httpClient, "Rol", "Roles", "roles");
   }
 }

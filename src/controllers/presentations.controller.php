@@ -31,12 +31,9 @@ class PresentationsController {
       return $response->withJson($data);
     } catch(PDOException $e){
       // Create response with error message
-      $data = array(
-          "code" => $e->getCode(),
-          "error" => $e->getMessage()
-      );        
-      // Return error with 500 code
-      return $response->withJson($data, 500);
+      $response = $response->write($e->getMessage());
+      $response = $response->withStatus(400);
+      return $response;
     }
   }
 
@@ -68,24 +65,21 @@ class PresentationsController {
           return $response->withJson($data);
         }
         // If no object was found, return 404 code
-        $data = array(
-          "data" => null
-        );
-        return $response->withJSON($data, 404);
+        $data = "Not found";
+        $response = $response->write($data);
+        $response = $response->withStatus(404);
+        return $response;
       } catch(PDOException $e){
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        return $response->withJson($data, 500);
+        $response = $response->write($e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
       }
     }else{
       // Create response with error message
-      $data = array(
-          "error" => "Missing fields"
-      );    
-      // Return error with 400 code   
-      return $response->withJson($data, 400);
+      $data = "Missing fields";
+      $response = $response->write($data);
+      $response = $response->withStatus(400);
+      return $response;
     }
   }
 
@@ -93,14 +87,15 @@ class PresentationsController {
     // Assign body params 
     $name = $request->getParam('name');
     $description = $request->getParam('description');
+    $price = $request->getParam('price');
     $imageURL = $request->getParam('imageURL');
     // Check body params
     if($name && $description && $imageURL){
       // SQL query string
       $sql = "INSERT INTO ".self::$collection." 
-      (name, description, imageURL) 
+      (name, description, price, imageURL) 
       VALUES
-      (:name, :description, :imageURL)";
+      (:name, :description,:price, :imageURL)";
 
       try{
         // Get DB Object
@@ -112,42 +107,35 @@ class PresentationsController {
         // Bind params
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':description',      $description);
+        $stmt->bindParam(':price',      $price);
         $stmt->bindParam(':imageURL', $imageURL);
         // Execute prepared statement
         $stmt->execute();
         // Create response array 
         $data = array(
             "data" => array(
-              "id" => (int)$db->lastInsertId(),
-              "imageURL" => $imageURL
+              "id" => (int)$db->lastInsertId()
             )
         );       
         // Return response as JSON with 200 code
         return $response->withJson($data, 200);
       } catch(PDOException $e){
         // Create response with error code and message 
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        // Return response as JSON with 500 code
-        return $response->withJson($data, 500);
+        $response = $response->write($e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
       } catch(Exception $e){
         // Create response with error code and message 
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        // Return response as JSON with 500 code
-        return $response->withJson($data, 500);
+        $response = $response->write($e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
       }
     }else{
       // Create response with error message
-      $data = array(
-          "error" => "Missing fields"
-      );    
-      // Return response as JSON with 400 code   
-      return $response->withJson($data, 400);
+      $data = "Missing fields";
+      $response = $response->write($data);
+      $response = $response->withStatus(400);
+      return $response;
     }
   }
   
@@ -157,13 +145,17 @@ class PresentationsController {
     // Assign body params
     $name = $request->getParam('name');
     $description = $request->getParam('description');
+    $price = intval($request->getParam('price'));
+    $imageURL = $request->getParam('imageURL');
     // Check ID and body params
-    if($id && $name && $description){
+    if($id && $name && $description && $price){
       // SQL query string
       $sql = "UPDATE ".self::$collection." SET
               name 	= :name,
-              description		= :description
-              WHERE id = :id";
+              description		= :description,
+              price		= :price";
+      if($imageURL) { $sql .= ",imageURL		= :imageURL"; }
+      $sql .= " WHERE id = :id";
 
       try{
         // Get DB Object
@@ -175,6 +167,8 @@ class PresentationsController {
         // Bind params
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':description',      $description);
+        $stmt->bindParam(':price', $price);
+        if($imageURL) { $stmt->bindParam(':imageURL',      $imageURL); }
         $stmt->bindParam(':id',    $id);
         // Execute prepared statement
         $stmt->execute();
@@ -183,20 +177,16 @@ class PresentationsController {
         return $response->withJSON($data,200);
       } catch(PDOException $e){
         // Create response with error code and message 
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        // Return response as JSON with 500 code
-        return $response->withJson($data, 500);
+        $response = $response->write($e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
       }
     }else{
       // Create response with error message
-      $data = array(
-          "error" => "Missing fields"
-      );    
-      // Return response as JSON with 400 code   
-      return $response->withJson($data, 400);
+      $data = "Missing fields";
+      $response = $response->write($data);
+      $response = $response->withStatus(400);
+      return $response;
     }
   }
 
@@ -223,23 +213,22 @@ class PresentationsController {
           return $response->withStatus(204);
         }
         // If no objects modified, return 404 code
-        return $response->withStatus(404);
+        $data = "Not found";
+        $response = $response->write($data);
+        $response = $response->withStatus(404);
+        return $response;      
       } catch(PDOException $e){
         // Create response with error code and message 
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        // Return response as JSON with 500 code
-        return $response->withJson($data, 500);
+        $response = $response->write($e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
       }
     }else{
       // Create response with error message
-      $data = array(
-          "error" => "Missing fields"
-      );    
-      // Return response as JSON with 400 code   
-      return $response->withJson($data, 400);
+      $data = "Missing fields";
+      $response = $response->write($data);
+      $response = $response->withStatus(400);
+      return $response;
     }
   }
 

@@ -34,7 +34,7 @@ class AuthController {
         // Fetch next row result as object
         // $user = $stmt->fetch(PDO::FETCH_CLASS, PDO::FETCH_PROPS_LATE, "User");
         $user = $stmt->fetch(PDO::FETCH_OBJ);
-        if(password_verify($password, $user->password_hash)) {
+        if(isset($user) && isset($user->password_hash) && password_verify($password, $user->password_hash)) {
           // echo json_encode($users);
           $iat = new DateTime();
           $exp = new DateTime('friday');
@@ -65,26 +65,22 @@ class AuthController {
           );
           return $response->withJson($data, 200);
         }
-        $data = array(
-          "error" => "Email/password is incorrect"
-        );
-        return $response->withJson($data, 400);
+        $data = "Email/password is incorrect";
+        $response = $response->write($data);
+        $response = $response->withStatus(400);
+        return $response;
       } catch(PDOException $e){
         // Create response with error message
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        // Return error with 400 code
-        return $response->withJson($data, 500);
+        $response = $response->write($e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
       }
     } else {
       // Create response with error message
-      $data = array(
-        "error" => "Missing fields"
-      );    
-      // Return response as JSON with 400 code   
-      return $response->withJson($data, 400);
+      $data = "Missing fields";
+      $response = $response->write($data);
+      $response = $response->withStatus(400);
+      return $response;
     }
   }
 
@@ -120,34 +116,27 @@ class AuthController {
         $stmt->execute();
         // Create response array 
         $data = array(
-            "data" => (int)$db->lastInsertId()
+            "data" => "Bienvenido!"
         );       
         // Return response as JSON with 200 code
         return $response->withJson($data, 200);
       } catch(PDOException $e){
         // Create response with error code and message 
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        // Return response as JSON with 500 code
-        return $response->withJson($data, 500);
+        $response = $response->write('PDOException '.$e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
       } catch(Exception $e){
         // Create response with error code and message 
-        $data = array(
-            "code" => $e->getCode(),
-            "error" => $e->getMessage()
-        );        
-        // Return response as JSON with 500 code
-        return $response->withJson($data, 500);
+        $response = $response->write('Exception '.$e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
       }
     }else{
       // Create response with error message
-      $data = array(
-          "error" => "Missing fields"
-      );    
-      // Return response as JSON with 400 code   
-      return $response->withJson($data, 400);
+      $data = "Missing fields";
+      $response = $response->write($data);
+      $response = $response->withStatus(400);
+      return $response;
     }
   }
 

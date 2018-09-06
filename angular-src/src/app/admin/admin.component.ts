@@ -13,10 +13,11 @@ export class AdminComponent implements OnInit {
     this.links = [
       { label: "Usuarios", route: "usuarios", icon: "people" },
       { label: "Roles", route: "roles", icon: "domain" },
-      { label: "Categorías", route: "categorias", icon: "category" },
       { label: "FAQs", route: "faqs", icon: "question_answer" },
+      { label: "Categorías", route: "categorias", icon: "category" },
       { label: "Presentaciones", route: "presentaciones", icon: "subscriptions" },
-      { label: "Sabores", route: "sabores", icon: "smoking_rooms" },
+      { label: "Sabores", route: "sabores", icon: "cloud" },
+      { label: "Cantidades de nicotina", route: "cantidades-nicotina", icon: "smoking_rooms" },
     ];
   }
 }

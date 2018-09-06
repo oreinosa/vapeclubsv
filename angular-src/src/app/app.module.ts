@@ -20,6 +20,7 @@ import { AuthGuard } from "./auth/auth.guard";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { JwtModule } from "@auth0/angular-jwt";
+import { CatalogModule } from "./catalog/catalog.module";
 
 
 export function tokenGetter() {
@@ -41,6 +42,7 @@ export function tokenGetter() {
     }),
     NotificationsModule,
     CoreModule,
+    CatalogModule,
     AuthModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })

@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  api: 'https://thenewfuturesv.com/api/v1/',
-  static: 'https://thenewfuturesv.com/static/',
+  api: 'http://vapeclub.sv/api/',
+  static: 'http://vapeclub.sv/static/',
 };

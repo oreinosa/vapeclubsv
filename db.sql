@@ -63,6 +63,22 @@ Por favor ten en cuenta que los tiempos de entrega son un estimado y que nosotro
 (12,"¿Ofrecen descuento al comprar varios frascos de E-liquid o bastante cantidad de líquido?","En vista de que nuestro producto ya tiene un precio bastante bajo, nos es imposible reducirlo aún más. Sin embargo, premiamos tu preferencia y lealtad con nuestra tarjeta de cliente frecuente, la cual te premia con líquido gratis al llenarla. Puedes obtener más información sobre dicha tarjeta acá http://card.vapeclubsv.com/."),
 (13,"¿Tienen venta al por mayor para reventa?","Actualmente estamos trabajando para poder ofrecer dicha opción pronto.");
 
+
+DROP TABLE IF EXISTS `nicotine_amounts`;
+CREATE TABLE IF NOT EXISTS `nicotine_amounts` (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(25) NOT NULL
+);
+INSERT INTO `nicotine_amounts`
+(name)
+VALUES
+("0mg"),
+('3mg'),
+('5mg'),
+('8mg'),
+('10mg'),
+("12mg");
+
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -71,13 +87,13 @@ CREATE TABLE IF NOT EXISTS `categories` (
     imageURL VARCHAR(250) DEFAULT NULL
 );
 INSERT INTO `categories`
-(id, name, description, imageURL)
+(id, name, description)
 VALUES
-(1, "Mentolados", "Deliciosas mezclas mentoladas.", "http://localhost:80/vape-club-backend/src/images/categoria_1.jpg"),
-(2, 'Frutales', 'Las mejores combinaciones frutales que puedas encontrar', "http://localhost:80/vape-club-backend/src/images/categoria_2.jpg"),
-(3, "Reposteria", "Sabores de reposteria y cereales", "http://localhost:80/vape-club-backend/src/images/categoria_3.jpg"),
-(4, "Bebidas y dulces","Buscas sabores a bebidas y dulces?", "http://localhost:80/vape-club-backend/src/images/categoria_4.jpg"),
-(5, "Tabaquiles", "Si tu gusto por el tabaco se mantiene aun con el vapeo.", "http://localhost:80/vape-club-backend/src/images/categoria_5.jpg");
+(1, "Mentolados", "Deliciosas mezclas mentoladas."),
+(2, 'Frutales', 'Las mejores combinaciones frutales que puedas encontrar'),
+(3, "Reposteria", "Sabores de reposteria y cereales"),
+(4, "Bebidas y dulces","Buscas sabores a bebidas y dulces?"),
+(5, "Tabaquiles", "Si tu gusto por el tabaco se mantiene aun con el vapeo.");
 
 DROP TABLE IF EXISTS `materials`;
 CREATE TABLE IF NOT EXISTS `materials` (
@@ -200,24 +216,11 @@ CREATE TABLE IF NOT EXISTS `presentations` (
     cost INT(10) NOT NULL
 );
 INSERT INTO `presentations`
-(id, name, description, imageURL, price, cost)
+(id, name, description, price, cost)
 VALUES
-(1, "30ml", "Nuestra presentación standard ha evolucionado y ahora viene en un frasco plástico que incluye gotero con punta fina y proteccion para niños.","http://localhost:80/vape-club-backend/src/images/catalogo_1.jpg", 14, 1),
-(2, "30ml", "Práctica y portatil presentación en botes Chubby Gorilla 100% originales. Tu mejor opción si cuentas con poco espacio para transportarlo.","http://localhost:80/vape-club-backend/src/images/catalogo_2.jpg", 15, 2),
-(3, "60ml", "¿30ml no son suficientes para tu gusto? Nuestra presentación de 60ml en botes Chubby Gorilla es entonces tu mejor opción!","http://localhost:80/vape-club-backend/src/images/catalogo_3.jpg", 25, 3);
-
-DROP TABLE IF EXISTS `products`;
-CREATE TABLE IF NOT EXISTS `products` (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    id_flavor INT UNSIGNED NOT NULL,
-      INDEX id_flavor_index (id_flavor),
-      FOREIGN KEY (id_flavor)
-      REFERENCES `flavors`(id),
-    id_presentation INT UNSIGNED NOT NULL,
-      INDEX id_presentation_index (id_presentation),
-      FOREIGN KEY (id_presentation)
-      REFERENCES `presentations`(id)
-);
+(1, "30ml", "Nuestra presentación standard ha evolucionado y ahora viene en un frasco plástico que incluye gotero con punta fina y proteccion para niños.", 14, 1),
+(2, "30ml", "Práctica y portatil presentación en botes Chubby Gorilla 100% originales. Tu mejor opción si cuentas con poco espacio para transportarlo.", 15, 2),
+(3, "60ml", "¿30ml no son suficientes para tu gusto? Nuestra presentación de 60ml en botes Chubby Gorilla es entonces tu mejor opción!", 25, 3);
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (

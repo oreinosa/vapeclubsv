@@ -7,6 +7,6 @@ import { DAO } from "../../shared/helpers/dao";
 })
 export class PresentationsService extends DAO<Presentation> {
   constructor(httpClient: HttpClient) {
-    super(httpClient, "Presentación", "Presentaciones", "admin/presentaciones");
+    super(httpClient, "Presentación", "Presentaciones", "presentaciones");
   }
 }

@@ -8,5 +8,6 @@ export class User {
     public phone?: number,
     public role?: Role,
     public reg_date?: Date,
+    public password?: string,
   ) {}
 }

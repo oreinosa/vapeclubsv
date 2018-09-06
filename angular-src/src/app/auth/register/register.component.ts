@@ -22,24 +22,24 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {}
 
-  prepareUsername(username: string) {
-    // console.log(username);
-    let dashesUsername: string;
-    dashesUsername = username.replace(/--+/g, "-").trim().replace(/\s+/g, "-");
-    const lastCharacterIndex = username.length - 1;
-    const lastCharacter = dashesUsername[lastCharacterIndex];
-    if (lastCharacter === "-") {
-      dashesUsername = dashesUsername.substring(0, lastCharacterIndex);
-    }
-    this.register.username = dashesUsername;
-  }
+  // prepareUsername(username: string) {
+  //   // console.log(username);
+  //   let dashesUsername: string;
+  //   dashesUsername = username.replace(/--+/g, "-").trim().replace(/\s+/g, "-");
+  //   const lastCharacterIndex = username.length - 1;
+  //   const lastCharacter = dashesUsername[lastCharacterIndex];
+  //   if (lastCharacter === "-") {
+  //     dashesUsername = dashesUsername.substring(0, lastCharacterIndex);
+  //   }
+  //   this.register.username = dashesUsername;
+  // }
 
   onSubmit(form: any) {
     const registerForm: Register = form.value;
     this.auth.register(registerForm).subscribe(
       (res: any) => {
-        console.log(res);
-        this.notifications.show(res.msg, undefined, "success");
+        // console.log(res);
+        this.notifications.show(res, undefined, "success");
         this.dialogRef.close();
       },
       (e: HttpErrorResponse) => {

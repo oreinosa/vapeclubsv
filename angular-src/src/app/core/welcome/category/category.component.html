@@ -2,7 +2,7 @@
   <div class="row">
     <ng-container *ngIf='category; else loading'>
       <div class="col-12 col-sm-4" style='position:relative'>
-        <img [src]="category?.imageURL" [alt]="category?.name" class='img-fluid'>
+        <img src="{{category?.imageURL | showImage }}" [alt]="category?.name" class='img-fluid'>
       </div>
       <div class="col-12 col-sm-8">
         <h5 class='mt-2 text-center'>{{ category?.name }}</h5>

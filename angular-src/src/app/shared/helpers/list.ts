@@ -24,7 +24,7 @@ export class List<T> implements OnInit, OnDestroy {
     //   const indexID = displayedColumns.indexOf("id");
     //   if (indexID >= 0) displayedColumns.splice(indexID, 1);
     // }
-    
+
   }
 
   ngOnInit() {
@@ -60,6 +60,6 @@ export class List<T> implements OnInit, OnDestroy {
       id = object["id"];
       this.service.setSelectedObject(object);
     }
-    this.router.navigate([this.service.apiRoute, action, id]);
+    this.router.navigate(['admin', this.service.apiRoute, action, id]);
   }
 }

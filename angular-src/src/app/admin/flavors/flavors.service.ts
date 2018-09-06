@@ -7,6 +7,6 @@ import { DAO } from "../../shared/helpers/dao";
 })
 export class FlavorsService extends DAO<Flavor> {
   constructor(httpClient: HttpClient) {
-    super(httpClient, "Sabor", "Sabores", "admin/sabores");
+    super(httpClient, "Sabor", "Sabores", "sabores");
   }
 }
