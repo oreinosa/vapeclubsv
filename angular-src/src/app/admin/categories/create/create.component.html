@@ -22,7 +22,7 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button type='submit' [disabled]='f.invalid || f.submitted'>Agregar</button>
+      <button mat-button type='submit' [disabled]='f.invalid || f.submitted || !upload.isValid'>Agregar</button>
       <button mat-button type='button' routerLink='../' [disabled]='f.submitted'>Cancelar</button>
     </mat-card-actions>
   </mat-card>

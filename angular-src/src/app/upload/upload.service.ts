@@ -8,16 +8,16 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class UploadService {
-  private api = environment.api + "upload/";
+  private api = environment.api + "upload";
 
   constructor(private http: HttpClient) { }
 
   uploadFile(route: string, file: File): Observable<string> {
     const formData: FormData = new FormData();
-    formData.append("uploadedFile", file, "upload");
+    formData.append("uploadedFile", file, file.name);
     formData.append("route", route);
 
-    return this.http.post<any>(this.api, formData).pipe(
+    return this.http.post<any>(this.api + '/file', formData).pipe(
       map(res => {
         return res.data as string;
       })

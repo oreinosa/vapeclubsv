@@ -27,6 +27,10 @@ export class UploadComponent implements OnInit {
 
   constructor(private uploadService: UploadService) { }
 
+  get isValid() : boolean {
+    return !!this.fileURL;
+  }
+
   ngOnInit() {
     if (this.fileURL) {
       this.mode = "edit";

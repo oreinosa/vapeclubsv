@@ -17,7 +17,6 @@ import { AuthService } from "./auth/auth.service";
 import { AdminGuard } from "./auth/admin.guard";
 import { AuthGuard } from "./auth/auth.guard";
 
-import { MenuModule } from "./menu/menu.module";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { JwtModule } from "@auth0/angular-jwt";
@@ -43,7 +42,6 @@ export function tokenGetter() {
     NotificationsModule,
     CoreModule,
     AuthModule,
-    MenuModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],

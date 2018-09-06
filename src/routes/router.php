@@ -13,3 +13,5 @@ require_once '../src/routes/flavors.router.php';
 require_once '../src/routes/faqs.router.php';
 // Auth Routes
 require_once '../src/routes/auth.router.php';
+// Upload Routes
+require_once '../src/routes/upload.router.php';

@@ -94,13 +94,14 @@ class CategoriesController {
     // Assign body params 
     $name = $request->getParam('name');
     $description = $request->getParam('description');
+    $imageURL = $request->getParam('imageURL');
     // Check body params
-    if($name && $description){
+    if($name && $description && $imageURL){
       // SQL query string
       $sql = "INSERT INTO ".self::$collection." 
-      (name, description) 
+      (name, description, imageURL) 
       VALUES
-      (:name, :description)";
+      (:name, :description, :imageURL)";
 
       try{
         // Get DB Object
@@ -112,12 +113,14 @@ class CategoriesController {
         // Bind params
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':description',      $description);
+        $stmt->bindParam(':imageURL',      $imageURL);
         // Execute prepared statement
         $stmt->execute();
         // Create response array 
         $data = array(
             "data" => array(
-              "id" => (int)$db->lastInsertId()
+              "id" => (int)$db->lastInsertId(),
+              "imageURL" => $imageURL
             )
         );       
         // Return response as JSON with 200 code
