@@ -7,8 +7,15 @@
 .mat-column-price{
   width: 10%;
 }
+.mat-column-imageURL {
+  width: 25%;
+  text-align: center;
+  .img-fluid {
+    height: 150px;
+  }
+}
 .mat-column-description{
-  width: 45%;
+  width: 20%;
 }
 .mat-column-actions{
   width: 20%;

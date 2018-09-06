@@ -28,7 +28,7 @@ $app->add(new Slim\Middleware\JwtAuthentication([
   "secure" => false 
 ]));
 
-define('STATICPATH', "C:\\Users\\Oscar Reinosa\\Documents\\GitHub\\vapeclubsv\\static\\");
+define('STATICPATH', "C:\\Users\\Oscar Reinosa\\Documents\\GitHub\\vapeclubsv\\public\\static\\");
 
 // Require DB class
 require_once '../src/config/db.php';

@@ -20,7 +20,7 @@ export class PresentationsComponent extends List<Presentation> {
     super(
       service,
       router,
-      ["id", "name", "price","description", "actions"]
+      ["id", "name", "price","description", "imageURL", "actions"]
     );
   }
 }

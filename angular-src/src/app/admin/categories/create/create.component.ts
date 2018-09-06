@@ -44,6 +44,7 @@ export class CreateComponent extends Create<Category> {
         },
         (error: HttpErrorResponse) => {
           console.log(error);
+          form.resetForm();
         }
       );
   }
