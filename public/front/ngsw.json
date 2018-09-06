@@ -1,0 +1,117 @@
+{
+  "configVersion": 1,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/1.524e4f163a6a67e53c5b.js",
+        "/2.53eddc813ad24cccf9af.js",
+        "/3.e34c4112ed2295d13425.js",
+        "/4.5601839c4e1d31b50d14.js",
+        "/5.c872be09fb39beaaf0f2.js",
+        "/6.e7a9804b038856e62066.js",
+        "/7.94493713185511f1ac6d.js",
+        "/8.4928e8ad1de84bd9885d.js",
+        "/9.8586890c42c345325a24.js",
+        "/common.6e0acb8405edcb699025.js",
+        "/favicon.ico",
+        "/index.html",
+        "/main.b47dc4c46130fc26c376.js",
+        "/polyfills.13caacc7a946cc7dfc93.js",
+        "/runtime.ba03d6fc9e098472d027.js",
+        "/styles.5768c2240c025786aedb.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/bg.jpg",
+        "/assets/catalogo_1.jpg",
+        "/assets/catalogo_2.jpg",
+        "/assets/catalogo_3.jpg",
+        "/assets/catalogo_4.jpg",
+        "/assets/flavor_1.jpg",
+        "/assets/flavor_2.jpg",
+        "/assets/flavor_3.jpg",
+        "/assets/flavor_4.jpg",
+        "/assets/flavor_5.jpg",
+        "/assets/images/icons/icon-128x128.png",
+        "/assets/images/icons/icon-144x144.png",
+        "/assets/images/icons/icon-152x152.png",
+        "/assets/images/icons/icon-192x192.png",
+        "/assets/images/icons/icon-384x384.png",
+        "/assets/images/icons/icon-512x512.png",
+        "/assets/images/icons/icon-72x72.png",
+        "/assets/images/icons/icon-96x96.png",
+        "/assets/images/logo.png",
+        "/assets/manifest.json",
+        "/assets/salud.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/1.524e4f163a6a67e53c5b.js": "812d4cb9ac158f43427eed15fbe0530c6317c3d7",
+    "/2.53eddc813ad24cccf9af.js": "2c9c4239c66e7573c3ce086427075d6bd0060372",
+    "/3.e34c4112ed2295d13425.js": "f1af35b9784bf73a4e40bac38963150ede8e440f",
+    "/4.5601839c4e1d31b50d14.js": "14268b70b296bb657dab5a2f38b5a0855e1ae215",
+    "/5.c872be09fb39beaaf0f2.js": "3dddf88f2cb9113a2a8b12d10f177c2815fae221",
+    "/6.e7a9804b038856e62066.js": "cef2a5f4328ac6c24ca18b762582ddbbf6414cf9",
+    "/7.94493713185511f1ac6d.js": "a98f1aa30fd390f6063a3fd6f41467ad747dadc4",
+    "/8.4928e8ad1de84bd9885d.js": "6f657c235ef8c64b55044f597e6102f61eebeac5",
+    "/9.8586890c42c345325a24.js": "67f82e128d43dcf86b8f62ac62c87eda8074b193",
+    "/assets/bg.jpg": "edb90eb724b3269fe5a7862eb8aa193a6aecdbe6",
+    "/assets/catalogo_1.jpg": "fe77bf40608f366700153c34286693f6f88461b1",
+    "/assets/catalogo_2.jpg": "1270ff1a240e8bae50eb69b9d1e2bf5fe95d89ec",
+    "/assets/catalogo_3.jpg": "ba20329b87b26469a66a041c4fee128270819e0c",
+    "/assets/catalogo_4.jpg": "3b70261cae0524e56869c03c3e0237ec57b71767",
+    "/assets/flavor_1.jpg": "e2b90358622922dca3683b9b20b7f6be2204f430",
+    "/assets/flavor_2.jpg": "370a190686e52d9e4c958993ca0a944b2f4fadfc",
+    "/assets/flavor_3.jpg": "ca155f7377f40654c484515b2076a17fbefe6cde",
+    "/assets/flavor_4.jpg": "20cdb38712faa695085ac987c3bc44da270ef67a",
+    "/assets/flavor_5.jpg": "c4b37b098f1b1a6db96965e42aac897b260d9343",
+    "/assets/images/icons/icon-128x128.png": "bf317af799669fa97da2c280969719aa5e8c4ff9",
+    "/assets/images/icons/icon-144x144.png": "29757b3d147018451d0a96b7aef8269f07b43489",
+    "/assets/images/icons/icon-152x152.png": "877cc80eaf890cb64b03095078908b37ee331bda",
+    "/assets/images/icons/icon-192x192.png": "7ab73584d1286fa9ccf4c8cabb7a54a06b29d3cf",
+    "/assets/images/icons/icon-384x384.png": "696d59de2eec6e991ff988bd3ceda80310667319",
+    "/assets/images/icons/icon-512x512.png": "08f97c64163c0ea737da8c516dbb4b200a10a31a",
+    "/assets/images/icons/icon-72x72.png": "8dce9718ad909445adf076680d2d4ba8ee7a48a8",
+    "/assets/images/icons/icon-96x96.png": "d637b088e163fdc9e211f4b3aa3e90119f076b21",
+    "/assets/images/logo.png": "3c7215d56a7ad3e78f2474c4d0774a9097cfc503",
+    "/assets/manifest.json": "9063f28c3e6c90c265227cfd1ec2b15fa567b493",
+    "/assets/salud.jpg": "3882ad388f16b994dede45a0ae1ee16bdf2948b8",
+    "/common.6e0acb8405edcb699025.js": "f7ef565be2932cc35ab7aa4c6c82584c4c8dfa12",
+    "/favicon.ico": "28f403f613fa11bf23aa9bb9efe421b417f5ff34",
+    "/index.html": "db1e778d5fa971949fa35f6553338c06fe37550f",
+    "/main.b47dc4c46130fc26c376.js": "4a1a665a6e35985f9a4282a7b5382ea9b59d2901",
+    "/polyfills.13caacc7a946cc7dfc93.js": "a44c9b5276e2cd2983aa31f156c66188a3dbc638",
+    "/runtime.ba03d6fc9e098472d027.js": "d79e03b285d5bae98480fb84524e4db47357b444",
+    "/styles.5768c2240c025786aedb.css": "3badf56e74b527dbf6ffe1dbffe3c2b4e7f6639b"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}

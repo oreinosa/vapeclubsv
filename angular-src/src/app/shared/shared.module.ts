@@ -28,10 +28,7 @@ import {
   MatPaginatorModule
 } from "@angular/material";
 import { CapitalizePipe } from "./pipes/capitalize.pipe";
-import { CreateComponent } from "./components/crud/create/create.component";
-import { ListComponent } from "./components/crud/list/list.component";
-import { UpdateComponent } from "./components/crud/update/update.component";
-import { DeleteComponent } from "./components/crud/delete/delete.component";
+
 import { ShowImagePipe } from './pipes/show-image.pipe';
 
 @NgModule({
@@ -94,18 +91,12 @@ import { ShowImagePipe } from './pipes/show-image.pipe';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    CreateComponent,
-    ListComponent,
-    UpdateComponent,
-    DeleteComponent
+
   ],
   declarations: [
     CapitalizePipe,
-    CreateComponent,
-    ListComponent,
-    UpdateComponent,
-    DeleteComponent,
+
     ShowImagePipe
   ]
 })
-export class SharedModule {}
+export class SharedModule { }
