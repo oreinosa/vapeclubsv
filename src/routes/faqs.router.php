@@ -1,8 +1,8 @@
 <?php
-require_once "../src/controllers/faqs.controller.php";
-require_once "../src/guards/admin.guard.php";
+require_once "../../src/controllers/faqs.controller.php";
+require_once "../../src/guards/admin.guard.php";
 
-$app->group('/api/admin/faqs', function(){
+$app->group('/admin/faqs', function(){
     // Get All FAQs
     $this->get('',\FAQsController::class.":getAll");
     // Get Single FAQ

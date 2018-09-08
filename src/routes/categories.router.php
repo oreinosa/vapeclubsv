@@ -1,8 +1,8 @@
 <?php
-require_once "../src/controllers/categories.controller.php";
-require_once "../src/guards/admin.guard.php";
+require_once "../../src/controllers/categories.controller.php";
+require_once "../../src/guards/admin.guard.php";
 
-$app->group('/api/admin/categorias', function(){
+$app->group('/admin/categorias', function(){
     // Get All Categories
     $this->get('',\CategoriesController::class.":getAll");
     // Get Single Category

@@ -2,7 +2,7 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-require_once '../src/environment.php';
+require_once '../../src/environment.php';
 
 // Config OPTIONS method for Angular HTTP requests
 $app->options('/{routes:.+}', function (Request $request, Response $response, $args) {
@@ -21,13 +21,11 @@ $app->add(function (Request $req, Response $res, $next) {
 // JWT middleware
 $app->add(new Slim\Middleware\JwtAuthentication([
   "secret" => getenv("JWT_SECRET"),
-  "path" => "/api/admin",
+  "path" => "/admin",
   "error" => function ($request, $response, $arguments) {
     return $response->write('Not Authorized')->withStatus(401);
   },
   "secure" => false 
 ]));
-
-
 // Require DB class
-require_once '../src/config/db.php';
+require_once '../../src/config/db.php';

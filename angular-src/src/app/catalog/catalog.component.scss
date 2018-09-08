@@ -1,0 +1,27 @@
+.flavor{
+  height: 650px;
+  .mat-card-header{
+    min-height: 95px;
+    max-height: 145px;
+  }
+  img{
+    height: 125px;
+  }
+  .mat-card-content{
+    margin-top: 15px;
+    p{
+      font-size: 150%;
+    }
+  }
+}
+.header{
+  font-size: 200%;
+}
+.catalog-label{
+  font-size:175%;
+}
+.overflow {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ellipsis { text-overflow: ellipsis; }

@@ -1,8 +1,8 @@
 <?php
-require_once "../src/controllers/users.controller.php";
-require_once "../src/guards/admin.guard.php";
+require_once "../../src/controllers/users.controller.php";
+require_once "../../src/guards/admin.guard.php";
 
-$app->group('/api/admin/usuarios', function(){
+$app->group('/admin/usuarios', function(){
     // Get All Users
     $this->get('',\UsersController::class.":getAll");
     // Get Single User

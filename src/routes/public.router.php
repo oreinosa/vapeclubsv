@@ -1,11 +1,11 @@
 <?php
-require_once "../src/controllers/faqs.controller.php";
-require_once "../src/controllers/categories.controller.php";
-require_once "../src/controllers/flavors.controller.php";
-require_once "../src/controllers/nicotine-amounts.controller.php";
-require_once "../src/controllers/presentations.controller.php";
+require_once "../../src/controllers/faqs.controller.php";
+require_once "../../src/controllers/categories.controller.php";
+require_once "../../src/controllers/flavors.controller.php";
+require_once "../../src/controllers/nicotine-amounts.controller.php";
+require_once "../../src/controllers/presentations.controller.php";
 
-$app->group('/api/public', function(){
+$app->group('/public', function(){
     // Get All FAQs
     $this->get('/faqs',\FAQsController::class.":getAll");
     // Get All Categories

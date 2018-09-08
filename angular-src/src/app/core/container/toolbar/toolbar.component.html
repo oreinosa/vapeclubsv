@@ -28,7 +28,8 @@
           </a>
           <mat-menu #subMenu="matMenu" xPosition='after' yPosition='below'>
             <span class='app-action-submenu-label' mat-subheader>{{ action.label }}</span>
-            <button class='app-action-submenu-item' mat-menu-item *ngFor='let childrenAction of action.children' [routerLink]='[action.name, childrenAction.route]' routerLinkActive='active'>
+            <button class='app-action-submenu-item' mat-menu-item *ngFor='let childrenAction of action.children' [routerLink]='[action.name, childrenAction.route]'
+              routerLinkActive='active'>
               <mat-icon>{{ childrenAction.icon }}</mat-icon>
               {{ childrenAction.label }}
             </button>
@@ -51,6 +52,7 @@
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
     <ng-template #showLogo>
+      <div class="large-separator" *ngIf='overlay ==="xl"'></div>
       <img src="/assets/images/logo.png" alt="app-logo" class="img-fluid" id="app-logo">
     </ng-template>
     <span id='app-title' *ngIf='!(overlay === "xs")'>{{ appName }}</span>

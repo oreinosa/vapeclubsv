@@ -1,8 +1,8 @@
 <?php
-require_once "../src/controllers/flavors.controller.php";
-require_once "../src/guards/admin.guard.php";
+require_once "../../src/controllers/flavors.controller.php";
+require_once "../../src/guards/admin.guard.php";
 
-$app->group('/api/admin/sabores', function(){
+$app->group('/admin/sabores', function(){
     // Get All Flavors
     $this->get('',\FlavorsController::class.":getAll");
     // Get Single Flavor

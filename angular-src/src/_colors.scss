@@ -3,9 +3,9 @@
 @include mat-core();
 
 // Copy the palettes from your selected theme (usually theme.scss).
-$app-primary-light: mat-palette($mat-gray, 200);
+$app-primary-light: mat-palette($mat-gray, 400);
 $app-primary: mat-palette($mat-gray, 900);
-$app-primary-dark: mat-palette($mat-gray, 600);
+$app-primary-dark: mat-palette($mat-gray, 800);
 
 $app-accent-light: mat-palette($mat-red, 300);
 $app-accent: mat-palette($mat-red, 400);
@@ -46,9 +46,14 @@ $danger-dark: mat-color($app-danger-dark);
 
 .bg-primary-light {
   background-color: $primary-light !important;
+  color: white!important;
 }
 .bg-primary {
   background-color: $primary !important;
+  color: white !important;
+}
+.bg-primary-dark {
+  background-color: $primary-dark !important;
   color: white !important;
 }
 button.bg-primary:hover,
@@ -59,9 +64,6 @@ a.bg-primary:active,
 a.bg-primary:focus {
   background-color: $primary-light !important;
   color: black !important;
-}
-.bg-primary-dark {
-  background-color: $primary-dark !important;
 }
 
 .bg-accent-light {

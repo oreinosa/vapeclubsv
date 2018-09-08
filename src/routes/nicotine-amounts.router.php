@@ -1,8 +1,8 @@
 <?php
-require_once "../src/controllers/nicotine-amounts.controller.php";
-require_once "../src/guards/admin.guard.php";
+require_once "../../src/controllers/nicotine-amounts.controller.php";
+require_once "../../src/guards/admin.guard.php";
 
-$app->group('/api/admin/cantidades-nicotina', function(){
+$app->group('/admin/cantidades-nicotina', function(){
     // Get All NicotineAmounts
     $this->get('',\NicotineAmountsController::class.":getAll");
     // Get Single NicotineAmount

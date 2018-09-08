@@ -13,8 +13,7 @@
         <input matInput type='text' placeholder='Descripción' [(ngModel)]='object.description' name='description' [readonly]='f.submitted'>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder='Categoría' [(ngModel)]='object.category' name='category' [compareWith]='compareCategoryFn' required
-          [disabled]='f.submitted'>
+        <mat-select placeholder='Categoría' [(ngModel)]='object.category' name='category' [compareWith]='compareCategoryFn' required>
           <mat-option *ngFor='let category of categories | async' [value]='category'>{{ category.name }}</mat-option>
         </mat-select>
       </mat-form-field>

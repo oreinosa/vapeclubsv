@@ -1,29 +1,58 @@
 <div class="row">
-  <div class="col-12">
+  <!-- NICOTINE LEVELS HEADER AND LABEL -->
+  <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-12 offset-lg-0 col-xl-10 offset-xl-1 mb-3">
     <mat-card class="bg-primary" style='display:inline-block'>
-      <h4>Catálogo</h4>
+      <h2>Niveles de nicotina</h2>
+    </mat-card>
+  </div>
+  <!-- CATALOGO CONTENT -->
+  <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-12 offset-lg-0 col-xl-10 offset-xl-1">
+    <div class="row">
+      <div *ngFor='let nicotineAmount of nicotineAmounts; even as isEven' class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-3">
+        <mat-card class="bg-primary-dark">
+          <h1 class='text-center'>{{ nicotineAmount.name }}</h1>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <!-- CATALOGO HEADER AND LABEL -->
+  <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-12 offset-lg-0 col-xl-10 offset-xl-1 mb-3">
+    <mat-card class="bg-primary" style='display:inline-block'>
+      <h2>Catálogo</h2>
+    </mat-card>
+    <br>
+    <br>
+    <mat-card class="bg-primary catalog-label">
+      <p>Disfruta de nuestra gran variedad de sabores, nuestro catálogo ha sido creado gracias a los comentarios de nuestros
+        clientes, etc etc </p>
     </mat-card>
   </div>
   <div class="col-12">
     <!-- CATALOGO CONTENT -->
     <div class="row">
-      <div *ngFor='let catalogItem of catalog; even as isEven' class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-0 mb-3">
-        <!-- [ngClass]='isEven ? "offset-lg-2" : ""' -->
-        <mat-card class='mb-3'>
+      <div *ngFor='let catalogItem of catalog; even as isEven' class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 col-xl-5 mb-3"
+        [ngClass]='isEven ? "offset-xl-1":""'>
+        <mat-card class='bg-primary-dark mb-3'>
           <mat-card-content class="text-center">
             <h2>{{ catalogItem.category.name }}</h2>
           </mat-card-content>
         </mat-card>
+
         <div class="row">
-          <div class='col-12 col-sm-6 mb-1' *ngFor='let flavor of catalogItem.flavors'>
-            <mat-card style='height:100%'>
+          <div class='col-12 col-md-6 mb-2' *ngFor='let flavor of catalogItem.flavors'>
+            <mat-card style='height:100%' class='mat-elevation-z0 bg-primary-light flavor'>
               <mat-card-header>
                 <mat-card-title>
-                  {{ flavor.name }}
+                  <h2>
+                    {{ flavor.name }}
+                  </h2>
                 </mat-card-title>
               </mat-card-header>
+              <img mat-card-image src="{{flavor.imageURL | showImage }}" [alt]="flavor.name + ' image'">
               <mat-card-content>
-                {{ flavor.description }}
+                <p>
+                  {{ flavor.description }}
+                </p>
               </mat-card-content>
             </mat-card>
           </div>

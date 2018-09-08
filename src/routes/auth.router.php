@@ -1,7 +1,7 @@
 <?php
-require_once "../src/controllers/auth.controller.php";
+require_once "../../src/controllers/auth.controller.php";
 
-$app->group('/api/auth', function(){
+$app->group('/auth', function(){
     // Login
     $this->post('/ingresar',\AuthController::class.":login");
     // Register

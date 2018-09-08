@@ -24,11 +24,15 @@ export class UploadService {
     );
   }
 
-  editFile(filePath: string, file: File): Observable<void> {
+  editFile(route: string, file: File): Observable<string> {
     const formData: FormData = new FormData();
-    formData.append("uploadedFile", file, "upload");
-    formData.append("filePath", filePath);
-    return this.http.put<any>(this.api, formData);
+    formData.append("uploadedFile", file, file.name);
+    formData.append("route", route);
+    return this.http.post<any>(this.api + '/file', formData).pipe(
+      map(res => {
+        return res.data as string;
+      })
+    );
   }
 
   deleteFile(filePath: string) {

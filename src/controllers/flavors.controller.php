@@ -120,14 +120,15 @@ class FlavorsController {
     // Assign body params 
     $name = $request->getParam('name');
     $description = $request->getParam('description');
+    $category = $request->getParam('category');
     $imageURL = $request->getParam('imageURL');
     // Check body params
-    if($name && $description && $imageURL){
+    if($name && $description && $imageURL && $category){
       // SQL query string
       $sql = "INSERT INTO ".self::$collection." 
-      (name, description, imageURL) 
+      (name, description, imageURL, id_category) 
       VALUES
-      (:name, :description, :imageURL)";
+      (:name, :description, :imageURL, :id_category)";
 
       try{
         // Get DB Object
@@ -140,6 +141,7 @@ class FlavorsController {
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':description',      $description);
         $stmt->bindParam(':imageURL',      $imageURL);
+        $stmt->bindParam(':id_category',      $category['id']);
         // Execute prepared statement
         $stmt->execute();
         // Create response array 

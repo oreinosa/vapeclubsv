@@ -1,7 +1,7 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-require_once "../src/helpers/upload.php";
+require_once "../../src/helpers/upload.php";
 
 class UploadController {
 

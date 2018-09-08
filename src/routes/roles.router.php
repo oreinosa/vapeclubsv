@@ -1,8 +1,8 @@
 <?php
-require_once "../src/controllers/roles.controller.php";
-require_once "../src/guards/admin.guard.php";
+require_once "../../src/controllers/roles.controller.php";
+require_once "../../src/guards/admin.guard.php";
 
-$app->group('/api/admin/roles', function(){
+$app->group('/admin/roles', function(){
     // Get All Roles
     $this->get('',\RolesController::class.":getAll");
     // Get Single Role

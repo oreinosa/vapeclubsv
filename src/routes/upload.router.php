@@ -1,8 +1,8 @@
 <?php
-require_once "../src/controllers/upload.controller.php";
-require_once "../src/guards/admin.guard.php";
+require_once "../../src/controllers/upload.controller.php";
+require_once "../../src/guards/admin.guard.php";
 
-$app->group('/api/upload', function(){
+$app->group('/upload', function(){
     // Upload one file
     $this->post('/file',\UploadController::class.":uploadFile");
 });

@@ -1,11 +1,8 @@
 <?php
-require '../vendor/autoload.php';
-
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \Firebase\JWT\JWT;
-require_once "../src/models/user.model.php";
-require_once '../src/environment.php';
+require_once '../../src/environment.php';
 
 class AuthController {
 
@@ -37,7 +34,7 @@ class AuthController {
         if(isset($user) && isset($user->password_hash) && password_verify($password, $user->password_hash)) {
           // echo json_encode($users);
           $iat = new DateTime();
-          $exp = new DateTime('friday');
+          $exp = new DateTime("tomorrow");
           // echo $iat->format('Y-m-d H:i:s');
           // echo '   ';
           // echo $exp->format('Y-m-d H:i:s');
@@ -57,7 +54,7 @@ class AuthController {
             // "exp" => $exp->format('Y-m-d H:i:s')
           );
           $token = JWT::encode($user, getenv("JWT_SECRET"));
-          unset($user["exp"], $user["iat"]);
+          // unset($user["exp"], $user["iat"]);
           // Generate JWT 
           $data = array(
             "data" => $user,

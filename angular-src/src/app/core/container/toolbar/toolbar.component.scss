@@ -19,6 +19,9 @@
 
 #toolbar {
   height: 64px;
+  .large-separator{
+    width: 75px;
+  }
   #app-logo, #avatar-photo{
     height: 60px;
   }

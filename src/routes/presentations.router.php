@@ -1,8 +1,8 @@
 <?php
-require_once "../src/controllers/presentations.controller.php";
-require_once "../src/guards/admin.guard.php";
+require_once "../../src/controllers/presentations.controller.php";
+require_once "../../src/guards/admin.guard.php";
 
-$app->group('/api/admin/presentaciones', function(){
+$app->group('/admin/presentaciones', function(){
     // Get All Presentations
     $this->get('',\PresentationsController::class.":getAll");
     // Get Single Presentation

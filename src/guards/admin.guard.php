@@ -8,7 +8,7 @@ class AdminGuardMiddleware {
       $response = $next($request, $response);
       return $response;
     } else{
-      return $response->write('Not Authorized')->withStatus(401);
+      return $response->write('Not Authorized')->withStatus(402);
     }
   }
 }

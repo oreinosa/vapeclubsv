@@ -46,7 +46,7 @@ export class CreateComponent extends Create<Flavor> {
           const imageCtrl = form.controls.imageURL;
           imageCtrl.setValue(imageURL); // set imageURL input value to the resolt of the upload POST event
           // form.setValue({ ...form.value, "imageURL": res.data });
-          // console.log(form.value);
+          console.log(form.value);
           super.onSubmit(form);
         },
         (error: HttpErrorResponse) => {
