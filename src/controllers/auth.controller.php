@@ -62,7 +62,7 @@ class AuthController {
           );
           return $response->withJson($data, 200);
         }
-        $data = "Email/password is incorrect";
+        $data = "Correo o contraseña incorrectos";
         $response = $response->write($data);
         $response = $response->withStatus(400);
         return $response;
