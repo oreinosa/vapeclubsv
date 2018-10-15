@@ -53,7 +53,8 @@ class AuthController {
             // "iat" => $iat->format('Y-m-d H:i:s'),
             // "exp" => $exp->format('Y-m-d H:i:s')
           );
-          $token = JWT::encode($user, getenv("JWT_SECRET"));
+          $secret = getenv("JWT_SECRET");
+          $token = JWT::encode($user, $secret);
           // unset($user["exp"], $user["iat"]);
           // Generate JWT 
           $data = array(
@@ -74,7 +75,7 @@ class AuthController {
       }
     } else {
       // Create response with error message
-      $data = "Missing fields";
+      $data = "Petición incompleta";
       $response = $response->write($data);
       $response = $response->withStatus(400);
       return $response;
@@ -130,7 +131,7 @@ class AuthController {
       }
     }else{
       // Create response with error message
-      $data = "Missing fields";
+      $data = "Petición incompleta";
       $response = $response->write($data);
       $response = $response->withStatus(400);
       return $response;
@@ -139,6 +140,50 @@ class AuthController {
 
   public static function getOneByUsername($request, $response) {
 
+  }
+
+  public static function checkDuplicateEmail(Request $request, Response $response, $next) {
+    // Assign email attribute
+    $email = $request->getParam('email');
+    // SQL query string
+    $sql = "SELECT count(email) as total FROM users WHERE email = :email";
+
+    if($email){
+      try{
+        // Get DB Object
+        $db = new DB();
+        // Connect
+        $db = $db->connect();
+        // Prepare statement
+        $stmt = $db->prepare($sql);
+        // Bind params 
+        $stmt->bindParam(':email', $email);
+        // Execute prepared statement
+        $stmt->execute();
+        // Fetch next row result as object
+        $rs = $stmt->fetch(PDO::FETCH_OBJ);
+        // If object was found
+        if($rs->total > 0){
+          $data = "Correo electrónico ya está en uso";
+          $response = $response->write($data);
+          $response = $response->withStatus(400);
+          return $response->withJson($data);
+        }
+        // If no object was found, pass next function
+        $response = $next($request, $response);
+        return $response;
+      } catch(PDOException $e){
+        $response = $response->write($e->getMessage());
+        $response = $response->withStatus(500);
+        return $response;
+      }
+    }else{
+      // Create response with error message
+      $data = "Petición incompleta";
+      $response = $response->write($data);
+      $response = $response->withStatus(400);
+      return $response;
+    }
   }
 
 }

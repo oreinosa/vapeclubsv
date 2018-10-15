@@ -21,6 +21,7 @@ $app->add(function (Request $req, Response $res, $next) {
 // JWT middleware
 $app->add(new Slim\Middleware\JwtAuthentication([
   "secret" => getenv("JWT_SECRET"),
+  // "secret" => "the-most-secret-secret",
   "path" => "/admin",
   "error" => function ($request, $response, $arguments) {
     return $response->write('Not Authorized')->withStatus(401);
