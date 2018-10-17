@@ -16,9 +16,10 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-toolbar [user]='user' [actions]='actions' [links]='links' [appName]='appName' [overlay]='overlay' (toggleNav)='drawer.toggle()'
-      (action)='onAction($event)'></app-toolbar>
+
     <div class="container-fluid">
+      <app-toolbar [user]='user' [actions]='actions' [links]='links' [appName]='appName' [overlay]='overlay' (toggleNav)='drawer.toggle()'
+        (action)='onAction($event)'></app-toolbar>
       <ng-content></ng-content>
     </div>
     <app-footer *ngIf='!(overlay === "xs" || overlay === "sm")'></app-footer>

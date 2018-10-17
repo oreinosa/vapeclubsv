@@ -1,0 +1,46 @@
+.toolbar-container  {
+  position: sticky;
+  z-index: 99;
+  height: 145px;
+}
+.mat-toolbar{
+  background-color: transparent!important;
+  #app-logo{
+    height: 110px;
+    position: absolute;
+    display: inline-block;
+    top: -110px;
+    left: 100px;
+  }
+  .actions{
+    position: absolute;
+    top: -90px;
+    right: 100px;
+    .mat-raised-button{
+      font-size: 14px;
+      line-height: 35px;
+      height: 35px;   
+      width: 165px;  
+      background-color: #75a48b; 
+    }
+    .mat-icon-button{
+      font-size: 25px;
+      line-height: 35px;
+      height: 35px;   
+      width: 35px;  
+      margin-left: 25px; 
+      color: white!important;
+      &:hover{
+       color: #75a48b!important; 
+      }
+    }
+  }
+}
+.images-container {
+  z-index: -1;
+  .img-container{
+    height: 100%;
+    background-image: url("http://vaperguru.ancorathemes.com/wp-content/uploads/2016/05/1.jpg");
+  }
+  height: 600px;
+}

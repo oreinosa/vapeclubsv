@@ -10,8 +10,8 @@ import {
 
 @Component({
   selector: "app-toolbar",
-  templateUrl: "../../container-1/toolbar/toolbar.component.html",
-  styleUrls: ["../../container-1/toolbar/toolbar.component.scss"]
+  templateUrl: "./toolbar.component.html",
+  styleUrls: ["./toolbar.component.scss"]
 })
 export class ToolbarComponent implements OnInit {
   @Input()
